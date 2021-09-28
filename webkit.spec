@@ -175,6 +175,7 @@ export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
 %cmake	-DPORT=GTK \
+	-DUSE_SOUP2=ON \
 	-DUSE_LD_GOLD=OFF \
 	-DUSE_WOFF2:BOOL=OFF \
 	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
