@@ -183,6 +183,7 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="" \
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
+	-DUSE_WPE_RENDERER=OFF \
 %ifarch %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 %endif
