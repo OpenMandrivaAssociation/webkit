@@ -1,7 +1,7 @@
 #FIXME
 # For some unknown (yet) reason webkit on aarch64 can be build only on mcbin. Synquacer causing strange issue.
 
-%define debug_package %{nil}
+%define _empty_manifest_terminate_build 0
 %define _disable_lto 1
 %define Werror_cflags %nil
 
