@@ -42,7 +42,7 @@ BuildRequires:	xdg-dbus-proxy
 BuildRequires:  ruby
 BuildRequires:  rubygems
 BuildRequires:  cmake
-
+BuildRequires:	egl-devel
 BuildRequires:  pkgconfig(atspi-2)
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(egl)
