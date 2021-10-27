@@ -1,7 +1,7 @@
 #FIXME
 # For some unknown (yet) reason webkit on aarch64 can be build only on mcbin. Synquacer causing strange issue.
 
-%define debug_package %{nil}
+%define _empty_manifest_terminate_build 0
 %define _disable_lto 1
 %define Werror_cflags %nil
 
@@ -21,7 +21,7 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.32.1
+Version:	2.34.1
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
@@ -42,7 +42,7 @@ BuildRequires:	xdg-dbus-proxy
 BuildRequires:  ruby
 BuildRequires:  rubygems
 BuildRequires:  cmake
-
+BuildRequires:	egl-devel
 BuildRequires:  pkgconfig(atspi-2)
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(egl)
@@ -61,6 +61,7 @@ BuildRequires:  pkgconfig(gstreamer-plugins-bad-1.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(icu-uc)
+BuildRequires:	pkgconfig(lcms2)
 BuildRequires:  pkgconfig(libjpeg)
 BuildRequires:  pkgconfig(libnotify)
 BuildRequires:  pkgconfig(libopenjp2)
@@ -175,12 +176,14 @@ export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
 %cmake	-DPORT=GTK \
+	-DUSE_SOUP2=ON \
 	-DUSE_LD_GOLD=OFF \
 	-DUSE_WOFF2:BOOL=OFF \
 	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="" \
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
+	-DUSE_WPE_RENDERER=OFF \
 %ifarch %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 %endif
