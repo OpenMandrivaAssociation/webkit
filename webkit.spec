@@ -62,6 +62,7 @@ BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(icu-uc)
 BuildRequires:	pkgconfig(lcms2)
+BuildRequires:	pkgconfig(libavif)
 BuildRequires:  pkgconfig(libjpeg)
 BuildRequires:  pkgconfig(libnotify)
 BuildRequires:  pkgconfig(libopenjp2)
@@ -183,7 +184,8 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="" \
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
-	-DUSE_WPE_RENDERER=OFF \
+	-DUSE_WPE_RENDERER=ON \
+	-DUSE_AVIF=ON \
 %ifarch %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 %endif
