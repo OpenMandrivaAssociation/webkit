@@ -22,7 +22,7 @@
 Summary:	Web browser engine
 Name:		webkit
 Version:	2.34.1
-Release:	1
+Release:	2
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -85,6 +85,10 @@ BuildRequires:  pkgconfig(wpe-1.0)
 BuildRequires:  pkgconfig(wpebackend-fdo-1.0)
 BuildRequires:  pkgconfig(xt)
 BuildRequires:	pkgconfig(libgcrypt)
+BuildRequires:	pkgconfig(libwoff2common)
+BuildRequires:	pkgconfig(libwoff2enc)
+BuildRequires:	pkgconfig(libwoff2dec)
+BuildRequires:	woff2-devel
 
 Requires:	%{libwebkit2} = %{version}
 %rename		webkit2
@@ -179,14 +183,14 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 %cmake	-DPORT=GTK \
 	-DUSE_SOUP2=ON \
 	-DUSE_LD_GOLD=OFF \
-	-DUSE_WOFF2:BOOL=OFF \
+	-DUSE_WOFF2:BOOL=ON \
 	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="" \
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
-%ifarch %{ix86} %{arm}
+%ifarch aarch64 %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 %endif
 %ifarch aarch64
