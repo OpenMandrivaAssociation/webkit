@@ -34,6 +34,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	bubblewrap
+BuildRequires:	ccache
 BuildRequires:	flex
 BuildRequires:	gperf
 BuildRequires:	hyphen-devel
