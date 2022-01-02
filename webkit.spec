@@ -44,6 +44,8 @@ BuildRequires:  ruby
 BuildRequires:  rubygems
 BuildRequires:  cmake
 BuildRequires:	egl-devel
+# For wayland-scanner
+BuildRequires:	wayland-tools
 BuildRequires:  pkgconfig(atspi-2)
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(egl)
