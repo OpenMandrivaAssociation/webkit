@@ -182,6 +182,7 @@ export CC=gcc
 export CXX=g++
 %endif
 
+# Clang 14 and webkit 2.36.0 crashing
 export CC=gcc
 export CXX=g++
 
