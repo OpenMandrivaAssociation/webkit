@@ -21,7 +21,7 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.34.6
+Version:	2.36.0
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
@@ -181,6 +181,10 @@ export GIGACAGE_ENABLED=0
 export CC=gcc
 export CXX=g++
 %endif
+
+# Clang 14 and webkit 2.36.0 crashing
+export CC=gcc
+export CXX=g++
 
 export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
