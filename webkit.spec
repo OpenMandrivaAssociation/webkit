@@ -201,6 +201,7 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DUSE_AVIF=ON \
 %ifarch aarch64 %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
+	-DUSE_SYSTEM_MALLOC=ON \
 %endif
 %ifarch aarch64
 	-DWTF_CPU_ARM64_CORTEXA53=OFF \
