@@ -29,6 +29,8 @@ Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 # (cb) force disable lto when building the typelibs
 #Patch1:		webkitgtk-2.10.4-nolto.patch
 Patch3:		webkit-gtk-2.24.4-eglmesaext-include.patch
+# imported from mga
+Patch4:		webkitgtk-linking.patch
 URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -184,8 +186,8 @@ export CXX=g++
 %endif
 
 # Clang 14 and webkit 2.36.0 crashing
-#export CC=gcc
-#export CXX=g++
+export CC=gcc
+export CXX=g++
 
 export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
