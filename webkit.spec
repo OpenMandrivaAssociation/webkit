@@ -187,8 +187,8 @@ export CXX=g++
 %endif
 
 # Clang 14 and webkit 2.36.0 crashing
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 
 export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
@@ -226,6 +226,7 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 %find_lang WebKit2GTK-%{api}
 
 %files -f WebKit2GTK-%{api}.lang
+%doc %{_datadir}/gtk-doc/html/
 %dir %{_libexecdir}/webkit2gtk-%{api}
 %{_bindir}/WebKitWebDriver
 %{_libexecdir}/webkit2gtk-%{api}/*
