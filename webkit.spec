@@ -21,14 +21,16 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.36.7
+Version:	2.38.0
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 # (cb) force disable lto when building the typelibs
-Patch1:		webkitgtk-2.10.4-nolto.patch
+#Patch1:		webkitgtk-2.10.4-nolto.patch
 Patch3:		webkit-gtk-2.24.4-eglmesaext-include.patch
+# imported from mga
+Patch4:		webkitgtk-linking.patch
 URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -43,6 +45,7 @@ BuildRequires:	xdg-dbus-proxy
 BuildRequires:  ruby
 BuildRequires:  rubygems
 BuildRequires:  cmake
+BuildRequires:	libatomic-devel
 BuildRequires:	egl-devel
 # For wayland-scanner
 BuildRequires:	wayland-tools
@@ -53,6 +56,7 @@ BuildRequires:  pkgconfig(enchant-2)
 BuildRequires:  pkgconfig(fontconfig)
 BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(geoclue-2.0)
+BuildRequires:  pkgconfig(gi-docgen)
 BuildRequires:  pkgconfig(gl)
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(glesv2)
@@ -183,8 +187,8 @@ export CXX=g++
 %endif
 
 # Clang 14 and webkit 2.36.0 crashing
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 
 export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
@@ -222,6 +226,7 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 %find_lang WebKit2GTK-%{api}
 
 %files -f WebKit2GTK-%{api}.lang
+%doc %{_datadir}/gtk-doc/html/
 %dir %{_libexecdir}/webkit2gtk-%{api}
 %{_bindir}/WebKitWebDriver
 %{_libexecdir}/webkit2gtk-%{api}/*
