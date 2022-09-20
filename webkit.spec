@@ -186,7 +186,8 @@ export CC=gcc
 export CXX=g++
 %endif
 
-# Clang 14 and webkit 2.36.0 crashing
+# Clang 14 and webkit 2.36.0 crashing at compile
+# Clang 15 and webkit 2.38.0 compiles fine but hardly crashing at runtime. Back to GCC.
 export CC=gcc
 export CXX=g++
 
