@@ -22,7 +22,7 @@
 Summary:	Web browser engine
 Name:		webkit
 Version:	2.38.0
-Release:	1
+Release:	2
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -187,8 +187,8 @@ export CXX=g++
 %endif
 
 # Clang 14 and webkit 2.36.0 crashing
-#export CC=gcc
-#export CXX=g++
+export CC=gcc
+export CXX=g++
 
 export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
