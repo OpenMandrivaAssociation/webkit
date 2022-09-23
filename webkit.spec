@@ -229,7 +229,7 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DCMAKE_CXX_FLAGS_RELEASE="" \
 	-DCMAKE_CXX_FLAGS_DEBUG=""
 
-%make_build
+cd ..
 
 %define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-5.0
 %cmake	-DPORT=GTK \
@@ -256,7 +256,11 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DCMAKE_C_FLAGS_DEBUG="" \
 	-DCMAKE_CXX_FLAGS_RELEASE="" \
 	-DCMAKE_CXX_FLAGS_DEBUG=""
-	
+
+%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
+%make_build
+
+%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-5.0
 %make_build
 
 %install
