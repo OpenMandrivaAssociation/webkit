@@ -8,21 +8,29 @@
 %define oname webkitgtk
 
 %define api 4.0
+%define api5 5.0
 
 %define javascriptcoregtk_major 18
 %define libjavascriptcoregtk %mklibname javascriptcoregtk %{api} %{javascriptcoregtk_major}
 %define javascriptcoregtk_gir %mklibname javascriptcore-gir %{api}
 
+%define libjavascriptcoregtk5 %mklibname javascriptcoregtk %{api5} %{javascriptcoregtk_major}
+%define javascriptcoregtk_gir5 %mklibname javascriptcore-gir %{api5}
+
 %define webkit2_major 37
 %define libwebkit2 %mklibname webkit2gtk %{api} %{webkit2_major}
 %define webkit2_gir %mklibname webkit2gtk-gir %{api}
 
+%define libwebkit5 %mklibname webkit2gtk %{api5} %{webkit2_major}
+%define webkit5_gir %mklibname webkit2gtk-gir %{api5}
+
 %define develname %mklibname -d webkit2
+%define develname5 %mklibname -d webkit5
 
 Summary:	Web browser engine
 Name:		webkit
 Version:	2.38.0
-Release:	2
+Release:	23
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -66,6 +74,7 @@ BuildRequires:  pkgconfig(gstreamer-1.0)
 BuildRequires:  pkgconfig(gstreamer-plugins-base-1.0)
 BuildRequires:  pkgconfig(gstreamer-plugins-bad-1.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
+BuildRequires:  pkgconfig(gtk4)
 BuildRequires:  pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(icu-uc)
 BuildRequires:	pkgconfig(lcms2)
@@ -78,6 +87,7 @@ BuildRequires:  pkgconfig(libpng)
 BuildRequires:  pkgconfig(libseccomp)
 BuildRequires:  pkgconfig(libsecret-1)
 BuildRequires:  pkgconfig(libsoup-2.4)
+BuildRequires:  pkgconfig(libsoup-3.0)
 BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(libwebp)
 BuildRequires:  pkgconfig(libwoff2dec)
@@ -194,6 +204,7 @@ export CXX=g++
 export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
+%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
 %cmake	-DPORT=GTK \
 	-DUSE_SOUP2=ON \
 	-DUSE_LD_GOLD=OFF \
@@ -218,13 +229,44 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DCMAKE_CXX_FLAGS_RELEASE="" \
 	-DCMAKE_CXX_FLAGS_DEBUG=""
 
+%make_build
 
+%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-5.0
+%cmake	-DPORT=GTK \
+	-DUSE_GTK4=ON \
+	-DUSE_LD_GOLD=OFF \
+	-DUSE_WOFF2:BOOL=ON \
+	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_C_FLAGS_RELEASE="" \
+	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
+	-DUSE_WPE_RENDERER=ON \
+	-DUSE_AVIF=ON \
+	-DUSE_SOUP2=OFF \
+%ifarch aarch64 %{ix86} %{arm}
+	-DENABLE_JIT=OFF \
+	-DUSE_SYSTEM_MALLOC=ON \
+%endif
+%ifarch aarch64
+	-DWTF_CPU_ARM64_CORTEXA53=OFF \
+%endif
+%ifarch %{ix86}
+	-DCMAKE_CXX_LIBRARY_ARCHITECTURE=%{_arch} \
+%endif
+	-DCMAKE_C_FLAGS_DEBUG="" \
+	-DCMAKE_CXX_FLAGS_RELEASE="" \
+	-DCMAKE_CXX_FLAGS_DEBUG=""
+	
 %make_build
 
 %install
+%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
 %make_install -C build
 
 %find_lang WebKit2GTK-%{api}
+
+%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-5.0
+%make_install -C build
 
 %files -f WebKit2GTK-%{api}.lang
 %doc %{_datadir}/gtk-doc/html/
