@@ -242,7 +242,6 @@ cd ..
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
-	-DUSE_SOUP2=OFF \
 %ifarch aarch64 %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
