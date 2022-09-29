@@ -212,7 +212,7 @@ export CXX=g++
 export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
-#%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
+#define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
 #%cmake	-DPORT=GTK \
 #	-DUSE_SOUP2=ON \
 #	-DUSE_LD_GOLD=OFF \
@@ -292,7 +292,7 @@ cd ..
 	-DCMAKE_CXX_FLAGS_RELEASE="" \
 	-DCMAKE_CXX_FLAGS_DEBUG=""
 
-#%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
+#define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
 #%make_build
 
 %define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.1
@@ -302,7 +302,7 @@ cd ..
 %make_build
 
 %install
-#%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
+#define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
 #%make_install -C build
 #
 #%find_lang WebKit2GTK-%{api}
