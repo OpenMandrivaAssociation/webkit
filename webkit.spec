@@ -295,11 +295,11 @@ cd ..
 #define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
 #%make_build
 
-%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.1
+#define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.1
 %make_build
 
-%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-5.0
-%make_build
+#define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-5.0
+#make_build
 
 %install
 #define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
