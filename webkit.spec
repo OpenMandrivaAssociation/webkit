@@ -181,7 +181,7 @@ GObject Introspection interface description for WebKit.
 # (tpg) do not build debug code
 # (cb) clang segfaults at Oz
 # (cb) ensure lto disabled
-%global optflags %(echo %{optflags} -fno-lto | sed -e 's/-g /-g0 /' -e 's/-gdwarf-4//' -e 's/-Oz/-O1/')
+%global optflags %(echo %{optflags} -fno-lto | sed -e 's/-g3 /-g0 /' -e 's/-g /-g0 /' -e 's/-gdwarf-4//' -e 's/-Oz/-O1/')
 
 # fix weird memory allocation
 export GIGACAGE_ENABLED=0
@@ -204,7 +204,7 @@ export CXX=g++
 export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
-%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
+export CMAKE_BUILD_DIR=build-4.0
 %cmake	-DPORT=GTK \
 	-DUSE_SOUP2=ON \
 	-DUSE_LD_GOLD=OFF \
@@ -228,10 +228,9 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DCMAKE_C_FLAGS_DEBUG="" \
 	-DCMAKE_CXX_FLAGS_RELEASE="" \
 	-DCMAKE_CXX_FLAGS_DEBUG=""
-
 cd ..
 
-%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-5.0
+export CMAKE_BUILD_DIR=build-5.0
 %cmake	-DPORT=GTK \
 	-DUSE_GTK4=ON \
 	-DUSE_LD_GOLD=OFF \
@@ -256,21 +255,20 @@ cd ..
 	-DCMAKE_C_FLAGS_DEBUG="" \
 	-DCMAKE_CXX_FLAGS_RELEASE="" \
 	-DCMAKE_CXX_FLAGS_DEBUG=""
+cd ..
 
-%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
-%make_build
+%make_build -C build-4.0
 
-%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-5.0
-%make_build
+%make_build -C build-5.0
 
 %install
-%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-4.0
-%make_install -C build
+%make_install -C build-4.0
 
 %find_lang WebKit2GTK-%{api}
 
-%define _vpath_builddir %{_vendor}-%{_target_os}-build/webkit2gtk-5.0
-%make_install -C build
+%make_install -C build-5.0
+
+%find_lang WebKit2GTK-%{api5}
 
 %files -f WebKit2GTK-%{api}.lang
 %doc %{_datadir}/gtk-doc/html/
@@ -305,4 +303,3 @@ cd ..
 %files -n %{webkit2_gir}
 %{_libdir}/girepository-1.0/WebKit2-%{api}.typelib
 %{_libdir}/girepository-1.0/WebKit2WebExtension-%{api}.typelib
-
