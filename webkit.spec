@@ -10,27 +10,29 @@
 %define api 4.0
 %define api5 5.0
 
-%define javascriptcoregtk_major 18
-%define libjavascriptcoregtk %mklibname javascriptcoregtk %{api} %{javascriptcoregtk_major}
-%define javascriptcoregtk_gir %mklibname javascriptcore-gir %{api}
+%define javascriptcoregtk4_major 18
+%define libjavascriptcoregtk4 %mklibname javascriptcoregtk %{api}
+%define javascriptcoregtk_gir4 %mklibname javascriptcore-gir %{api}
 
-%define libjavascriptcoregtk5 %mklibname javascriptcoregtk %{api5} %{javascriptcoregtk_major}
-%define javascriptcoregtk_gir5 %mklibname javascriptcore-gir %{api5}
+%define javascriptcoregtk_major 0
+%define libjavascriptcoregtk %mklibname javascriptcoregtk %{api5}
+%define javascriptcoregtk_gir %mklibname javascriptcore-gir %{api5}
 
 %define webkit2_major 37
-%define libwebkit2 %mklibname webkit2gtk %{api} %{webkit2_major}
+%define libwebkit2 %mklibname webkit2gtk %{api}
 %define webkit2_gir %mklibname webkit2gtk-gir %{api}
 
-%define libwebkit5 %mklibname webkit2gtk %{api5} %{webkit2_major}
+%define webkit5_major 0
+%define libwebkit5 %mklibname webkit2gtk %{api5}
 %define webkit5_gir %mklibname webkit2gtk-gir %{api5}
 
-%define develname %mklibname -d webkit2
-%define develname5 %mklibname -d webkit5
+%define develname %mklibname -d webkit5
+%define develname4 %mklibname -d webkit2
 
 Summary:	Web browser engine
 Name:		webkit
 Version:	2.38.0
-Release:	23
+Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -115,6 +117,21 @@ Requires:	%{libwebkit2} = %{version}
 %description
 WebKit is an open source web browser engine.
 
+%package -n %{name}4
+Summary:	Version of the WebKit engine for older libraries
+Group:		System/Libraries
+
+%description -n %{name}4
+Version of the WebKit engine for older libraries
+
+%package	jsc4
+Summary:	JavaScriptCore shell for old WebKit GTK+
+Group:		Development/GNOME and GTK+
+
+%description	jsc4
+jsc4 is a shell for old JavaScriptCore, WebKit's JavaScript engine. It
+allows you to interact with the JavaScript engine directly.
+
 %package	jsc
 Summary:	JavaScriptCore shell for WebKit GTK+
 Group:		Development/GNOME and GTK+
@@ -126,12 +143,33 @@ allows you to interact with the JavaScript engine directly.
 %package -n	%{libwebkit2}
 Summary:	GTK+ port of WebKit web browser engine
 Group:		System/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name}4 = %{version}
 
 %description -n	%{libwebkit2}
 The GTK+ port of WebKit is intended to provide a browser component
 primarily for users of the portable GTK+ UI toolkit on platforms like
 Linux.
+
+%package -n	%{libwebkit5}
+Summary:	GTK+ port of WebKit web browser engine
+Group:		System/Libraries
+Requires:	%{name} = %{version}
+
+%description -n	%{libwebkit5}
+The GTK+ port of WebKit is intended to provide a browser component
+primarily for users of the portable GTK+ UI toolkit on platforms like
+Linux.
+
+%package -n	%{libjavascriptcoregtk4}
+Summary:        GTK+ port of WebKit web browser engine for old libraries
+Group:          System/Libraries
+
+%description -n	%{libjavascriptcoregtk4}
+The GTK+ port of WebKit is intended to provide a browser component
+primarily for users of the portable GTK+ UI toolkit on platforms like
+Linux.
+
+This version is for use with old libraries
 
 %package -n	%{libjavascriptcoregtk}
 Summary:        GTK+ port of WebKit web browser engine
@@ -142,15 +180,31 @@ The GTK+ port of WebKit is intended to provide a browser component
 primarily for users of the portable GTK+ UI toolkit on platforms like
 Linux.
 
+%package -n	%{develname4}
+Summary:	Development files for WebKit GTK+ port for old libraries
+Group:		Development/GNOME and GTK+
+Provides:	%{name}2-devel = %{version}-%{release}
+Provides:	libwebkit2gtk-devel = %{version}-%{release}
+Requires:	%{libjavascriptcoregtk4} = %{version}
+Requires:	%{libwebkit2} = %{version}
+Requires:	%{javascriptcoregtk_gir4} = %{version}
+Requires:	%{webkit2_gir} = %{version}
+
+%description -n	%{develname4}
+The GTK+ port of WebKit is intended to provide a browser component
+primarily for users of the portable GTK+ UI toolkit on platforms like
+Linux. This package contains development headers for use with old
+libraries.
+
 %package -n	%{develname}
 Summary:	Development files for WebKit GTK+ port
 Group:		Development/GNOME and GTK+
 Provides:	%{name}-devel = %{version}-%{release}
-Provides:	libwebkit2gtk-devel = %{version}-%{release}
+Provides:	libwebkit5gtk-devel = %{version}-%{release}
 Requires:	%{libjavascriptcoregtk} = %{version}
-Requires:	%{libwebkit2} = %{version}
+Requires:	%{libwebkit5} = %{version}
 Requires:	%{javascriptcoregtk_gir} = %{version}
-Requires:	%{webkit2_gir} = %{version}
+Requires:	%{webkit5_gir} = %{version}
 
 %description -n	%{develname}
 The GTK+ port of WebKit is intended to provide a browser component
@@ -165,6 +219,14 @@ Requires:       %{libjavascriptcoregtk} = %{version}-%{release}
 %description -n	%{javascriptcoregtk_gir}
 GObject Introspection interface description for JSCore.
 
+%package -n	%{javascriptcoregtk_gir4}
+Summary:        GObject Introspection interface description for JSCore
+Group:          System/Libraries
+Requires:       %{libjavascriptcoregtk4} = %{version}-%{release}
+
+%description -n	%{javascriptcoregtk_gir4}
+GObject Introspection interface description for JSCore.
+
 %package -n	%{webkit2_gir}
 Summary:        GObject Introspection interface description for %{name}
 Group:          System/Libraries
@@ -173,9 +235,16 @@ Requires:       %{libwebkit2} = %{version}-%{release}
 %description -n	%{webkit2_gir}
 GObject Introspection interface description for WebKit.
 
+%package -n	%{webkit5_gir}
+Summary:        GObject Introspection interface description for %{name}
+Group:          System/Libraries
+Requires:       %{libwebkit5} = %{version}-%{release}
+
+%description -n	%{webkit5_gir}
+GObject Introspection interface description for WebKit.
+
 %prep
-%setup -qn %{oname}-%{version}
-%autopatch -p1
+%autosetup -p1 -n %{oname}-%{version}
 
 %build
 # (tpg) do not build debug code
@@ -270,7 +339,7 @@ cd ..
 
 %find_lang WebKit2GTK-%{api5}
 
-%files -f WebKit2GTK-%{api}.lang
+%files -n %{name}4 -f WebKit2GTK-%{api}.lang
 %doc %{_datadir}/gtk-doc/html/
 %dir %{_libexecdir}/webkit2gtk-%{api}
 %{_bindir}/WebKitWebDriver
@@ -280,26 +349,58 @@ cd ..
 %dir %{_libdir}/webkit2gtk-%{api}/injected-bundle
 %{_libdir}/webkit2gtk-%{api}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
-%files jsc
+%files -f WebKit2GTK-%{api5}.lang
+%dir %{_libexecdir}/webkit2gtk-%{api5}
+%{_libexecdir}/webkit2gtk-%{api5}/*
+%exclude %{_libexecdir}/webkit2gtk-%{api5}/jsc
+%dir %{_libdir}/webkit2gtk-%{api5}
+%dir %{_libdir}/webkit2gtk-%{api5}/injected-bundle
+%{_libdir}/webkit2gtk-%{api5}/injected-bundle/libwebkit2gtkinjectedbundle.so
+
+%files jsc4
 %{_libexecdir}/webkit2gtk-%{api}/jsc
 
+%files jsc
+%{_libexecdir}/webkit2gtk-%{api5}/jsc
+
+%files -n %{libjavascriptcoregtk4}
+%{_libdir}/libjavascriptcoregtk-%{api}.so.%{javascriptcoregtk4_major}
+%{_libdir}/libjavascriptcoregtk-%{api}.so.%{javascriptcoregtk4_major}.*
+
 %files -n %{libjavascriptcoregtk}
-%{_libdir}/libjavascriptcoregtk-%{api}.so.%{javascriptcoregtk_major}
-%{_libdir}/libjavascriptcoregtk-%{api}.so.%{javascriptcoregtk_major}.*
+%{_libdir}/libjavascriptcoregtk-%{api5}.so.%{javascriptcoregtk_major}
+%{_libdir}/libjavascriptcoregtk-%{api5}.so.%{javascriptcoregtk_major}.*
 
 %files -n %{libwebkit2}
 %{_libdir}/libwebkit2gtk-%{api}.so.%{webkit2_major}
 %{_libdir}/libwebkit2gtk-%{api}.so.%{webkit2_major}.*
 
+%files -n %{libwebkit5}
+%{_libdir}/libwebkit2gtk-%{api5}.so.%{webkit5_major}
+%{_libdir}/libwebkit2gtk-%{api5}.so.%{webkit5_major}.*
+
 %files -n %{develname}
+%{_includedir}/webkitgtk-%{api5}
+%{_libdir}/*-%{api5}.so
+%{_libdir}/pkgconfig/*-%{api5}.pc
+%{_datadir}/gir-1.0/*-%{api5}.gir
+
+%files -n %{develname4}
 %{_includedir}/webkitgtk-%{api}
 %{_libdir}/*-%{api}.so
 %{_libdir}/pkgconfig/*-%{api}.pc
 %{_datadir}/gir-1.0/*-%{api}.gir
 
 %files -n %{javascriptcoregtk_gir}
+%{_libdir}/girepository-1.0/JavaScriptCore-%{api5}.typelib
+
+%files -n %{javascriptcoregtk_gir4}
 %{_libdir}/girepository-1.0/JavaScriptCore-%{api}.typelib
 
 %files -n %{webkit2_gir}
 %{_libdir}/girepository-1.0/WebKit2-%{api}.typelib
 %{_libdir}/girepository-1.0/WebKit2WebExtension-%{api}.typelib
+
+%files -n %{webkit5_gir}
+%{_libdir}/girepository-1.0/WebKit2-%{api5}.typelib
+%{_libdir}/girepository-1.0/WebKit2WebExtension-%{api5}.typelib
