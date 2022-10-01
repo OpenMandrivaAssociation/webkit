@@ -8,7 +8,7 @@
 %define oname webkitgtk
 
 %define api 4.0
-%define api4 4.1
+%define api4.1 4.1
 %define api5 5.0
 
 %define javascriptcoregtk4_major 18
@@ -16,8 +16,8 @@
 %define javascriptcoregtk_gir4 %mklibname javascriptcore-gir %{api}
 
 %define javascriptcoregtk4.1_major 0
-%define libjavascriptcoregtk4.1 %mklibname javascriptcoregtk %{api4}
-%define javascriptcoregtk_gir4.1 %mklibname javascriptcore-gir %{api4}
+%define libjavascriptcoregtk4.1 %mklibname javascriptcoregtk %{api4.1}
+%define javascriptcoregtk_gir4.1 %mklibname javascriptcore-gir %{api4.1}
 
 %define javascriptcoregtk_major 0
 %define libjavascriptcoregtk %mklibname javascriptcoregtk %{api5}
@@ -28,8 +28,8 @@
 %define webkit2_gir %mklibname webkit2gtk-gir %{api}
 
 %define webkit2_major 0
-%define libwebkit4.1 %mklibname webkit2gtk %{api4}
-%define webkit4.1_gir %mklibname webkit2gtk-gir %{api4}
+%define libwebkit4.1 %mklibname webkit2gtk %{api4.1}
+%define webkit4.1_gir %mklibname webkit2gtk-gir %{api4.1}
 
 %define webkit5_major 0
 %define libwebkit5 %mklibname webkit2gtk %{api5}
