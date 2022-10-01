@@ -8,11 +8,16 @@
 %define oname webkitgtk
 
 %define api 4.0
+%define api41 4.1
 %define api5 5.0
 
 %define javascriptcoregtk4_major 18
 %define libjavascriptcoregtk4 %mklibname javascriptcoregtk %{api}
 %define javascriptcoregtk_gir4 %mklibname javascriptcore-gir %{api}
+
+%define javascriptcoregtk41_major 0
+%define libjavascriptcoregtk41 %mklibname javascriptcoregtk %{api41}
+%define javascriptcoregtk_gir41 %mklibname javascriptcore-gir %{api41}
 
 %define javascriptcoregtk_major 0
 %define libjavascriptcoregtk %mklibname javascriptcoregtk %{api5}
@@ -22,12 +27,17 @@
 %define libwebkit2 %mklibname webkit2gtk %{api}
 %define webkit2_gir %mklibname webkit2gtk-gir %{api}
 
+%define webkit41_major 0
+%define libwebkit41 %mklibname webkit2gtk %{api41}
+%define webkit41_gir %mklibname webkit2gtk-gir %{api41}
+
 %define webkit5_major 0
 %define libwebkit5 %mklibname webkit2gtk %{api5}
 %define webkit5_gir %mklibname webkit2gtk-gir %{api5}
 
 %define develname %mklibname -d webkit5
 %define develname4 %mklibname -d webkit2
+%define develname41 %mklibname -d webkit4.1
 
 Summary:	Web browser engine
 Name:		webkit
@@ -111,17 +121,35 @@ BuildRequires:	pkgconfig(libwoff2enc)
 BuildRequires:	pkgconfig(libwoff2dec)
 BuildRequires:	woff2-devel
 
-Requires:	%{libwebkit2} = %{version}
+Requires:	%{name}-common = %{EVRD}
+Requires:	%{libwebkit5} = %{version}
 %rename		webkit2
 
 %description
 WebKit is an open source web browser engine.
 
+%package common
+Summary:	Files needed by every version of the WebKit engine
+Group:		System/Libraries
+
+%description common
+Files needed by every version of the WebKit engine
+
 %package -n %{name}4
 Summary:	Version of the WebKit engine for older libraries
 Group:		System/Libraries
+Requires:	%{name}-common = %{EVRD}
+Requires:	%{libwebkit2} = %{version}
 
 %description -n %{name}4
+Version of the WebKit engine for older libraries
+
+%package -n %{name}4.1
+Summary:	Version of the WebKit engine for older libraries
+Group:		System/Libraries
+Requires:	%{name}-common = %{EVRD}
+
+%description -n %{name}4.1
 Version of the WebKit engine for older libraries
 
 %package	jsc4
@@ -129,6 +157,14 @@ Summary:	JavaScriptCore shell for old WebKit GTK+
 Group:		Development/GNOME and GTK+
 
 %description	jsc4
+jsc4 is a shell for old JavaScriptCore, WebKit's JavaScript engine. It
+allows you to interact with the JavaScript engine directly.
+
+%package	jsc4.1
+Summary:	JavaScriptCore shell for old WebKit GTK+
+Group:		Development/GNOME and GTK+
+
+%description	jsc4.1
 jsc4 is a shell for old JavaScriptCore, WebKit's JavaScript engine. It
 allows you to interact with the JavaScript engine directly.
 
@@ -141,14 +177,24 @@ jsc is a shell for JavaScriptCore, WebKit's JavaScript engine. It
 allows you to interact with the JavaScript engine directly.
 
 %package -n	%{libwebkit2}
-Summary:	GTK+ port of WebKit web browser engine
+Summary:	GTK+ port of WebKit web browser engine for old libraries
 Group:		System/Libraries
 Requires:	%{name}4 = %{version}
 
 %description -n	%{libwebkit2}
 The GTK+ port of WebKit is intended to provide a browser component
 primarily for users of the portable GTK+ UI toolkit on platforms like
-Linux.
+Linux using old libraries.
+
+%package -n	%{libwebkit41}
+Summary:	GTK+ port of WebKit web browser engine for old libraries
+Group:		System/Libraries
+Requires:	%{name}4.1 = %{version}
+
+%description -n	%{libwebkit41}
+The GTK+ port of WebKit is intended to provide a browser component
+primarily for users of the portable GTK+ UI toolkit on platforms like
+Linux using old libraries.
 
 %package -n	%{libwebkit5}
 Summary:	GTK+ port of WebKit web browser engine
@@ -165,6 +211,17 @@ Summary:        GTK+ port of WebKit web browser engine for old libraries
 Group:          System/Libraries
 
 %description -n	%{libjavascriptcoregtk4}
+The GTK+ port of WebKit is intended to provide a browser component
+primarily for users of the portable GTK+ UI toolkit on platforms like
+Linux.
+
+This version is for use with old libraries
+
+%package -n	%{libjavascriptcoregtk41}
+Summary:        GTK+ port of WebKit web browser engine for old libraries
+Group:          System/Libraries
+
+%description -n	%{libjavascriptcoregtk41}
 The GTK+ port of WebKit is intended to provide a browser component
 primarily for users of the portable GTK+ UI toolkit on platforms like
 Linux.
@@ -191,6 +248,22 @@ Requires:	%{javascriptcoregtk_gir4} = %{version}
 Requires:	%{webkit2_gir} = %{version}
 
 %description -n	%{develname4}
+The GTK+ port of WebKit is intended to provide a browser component
+primarily for users of the portable GTK+ UI toolkit on platforms like
+Linux. This package contains development headers for use with old
+libraries.
+
+%package -n	%{develname41}
+Summary:	Development files for WebKit GTK+ port for old libraries
+Group:		Development/GNOME and GTK+
+Provides:	%{name}4.1-devel = %{version}-%{release}
+Provides:	libwebkit4.1gtk-devel = %{version}-%{release}
+Requires:	%{libjavascriptcoregtk41} = %{version}
+Requires:	%{libwebkit41} = %{version}
+Requires:	%{javascriptcoregtk_gir41} = %{version}
+Requires:	%{webkit41_gir} = %{version}
+
+%description -n	%{develname41}
 The GTK+ port of WebKit is intended to provide a browser component
 primarily for users of the portable GTK+ UI toolkit on platforms like
 Linux. This package contains development headers for use with old
@@ -227,12 +300,28 @@ Requires:       %{libjavascriptcoregtk4} = %{version}-%{release}
 %description -n	%{javascriptcoregtk_gir4}
 GObject Introspection interface description for JSCore.
 
+%package -n	%{javascriptcoregtk_gir41}
+Summary:        GObject Introspection interface description for JSCore
+Group:          System/Libraries
+Requires:       %{libjavascriptcoregtk41} = %{version}-%{release}
+
+%description -n	%{javascriptcoregtk_gir41}
+GObject Introspection interface description for JSCore.
+
 %package -n	%{webkit2_gir}
 Summary:        GObject Introspection interface description for %{name}
 Group:          System/Libraries
 Requires:       %{libwebkit2} = %{version}-%{release}
 
 %description -n	%{webkit2_gir}
+GObject Introspection interface description for WebKit.
+
+%package -n	%{webkit41_gir}
+Summary:        GObject Introspection interface description for %{name}
+Group:          System/Libraries
+Requires:       %{libwebkit41} = %{version}-%{release}
+
+%description -n	%{webkit41_gir}
 GObject Introspection interface description for WebKit.
 
 %package -n	%{webkit5_gir}
@@ -299,6 +388,32 @@ export CMAKE_BUILD_DIR=build-4.0
 	-DCMAKE_CXX_FLAGS_DEBUG=""
 cd ..
 
+export CMAKE_BUILD_DIR=build-4.1
+%cmake	-DPORT=GTK \
+	-DUSE_SOUP2=OFF \
+	-DUSE_LD_GOLD=OFF \
+	-DUSE_WOFF2:BOOL=ON \
+	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_C_FLAGS_RELEASE="" \
+	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
+	-DUSE_WPE_RENDERER=ON \
+	-DUSE_AVIF=ON \
+%ifarch aarch64 %{ix86} %{arm}
+	-DENABLE_JIT=OFF \
+	-DUSE_SYSTEM_MALLOC=ON \
+%endif
+%ifarch aarch64
+	-DWTF_CPU_ARM64_CORTEXA53=OFF \
+%endif
+%ifarch %{ix86}
+	-DCMAKE_CXX_LIBRARY_ARCHITECTURE=%{_arch} \
+%endif
+	-DCMAKE_C_FLAGS_DEBUG="" \
+	-DCMAKE_CXX_FLAGS_RELEASE="" \
+	-DCMAKE_CXX_FLAGS_DEBUG=""
+cd ..
+
 export CMAKE_BUILD_DIR=build-5.0
 %cmake	-DPORT=GTK \
 	-DUSE_GTK4=ON \
@@ -328,6 +443,8 @@ cd ..
 
 %make_build -C build-4.0
 
+%make_build -C build-4.1
+
 %make_build -C build-5.0
 
 %install
@@ -335,19 +452,33 @@ cd ..
 
 %find_lang WebKit2GTK-%{api}
 
+%make_install -C build-4.1
+
+%find_lang WebKit2GTK-%{api41}
+
 %make_install -C build-5.0
 
 %find_lang WebKit2GTK-%{api5}
 
+%files common
+%{_bindir}/WebKitWebDriver
+
 %files -n %{name}4 -f WebKit2GTK-%{api}.lang
 %doc %{_datadir}/gtk-doc/html/
 %dir %{_libexecdir}/webkit2gtk-%{api}
-%{_bindir}/WebKitWebDriver
 %{_libexecdir}/webkit2gtk-%{api}/*
 %exclude %{_libexecdir}/webkit2gtk-%{api}/jsc
 %dir %{_libdir}/webkit2gtk-%{api}
 %dir %{_libdir}/webkit2gtk-%{api}/injected-bundle
 %{_libdir}/webkit2gtk-%{api}/injected-bundle/libwebkit2gtkinjectedbundle.so
+
+%files -n %{name}4.1 -f WebKit2GTK-%{api41}.lang
+%dir %{_libexecdir}/webkit2gtk-%{api41}
+%{_libexecdir}/webkit2gtk-%{api41}/*
+%exclude %{_libexecdir}/webkit2gtk-%{api41}/jsc
+%dir %{_libdir}/webkit2gtk-%{api41}
+%dir %{_libdir}/webkit2gtk-%{api41}/injected-bundle
+%{_libdir}/webkit2gtk-%{api41}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
 %files -f WebKit2GTK-%{api5}.lang
 %dir %{_libexecdir}/webkit2gtk-%{api5}
@@ -360,12 +491,19 @@ cd ..
 %files jsc4
 %{_libexecdir}/webkit2gtk-%{api}/jsc
 
+%files jsc4.1
+%{_libexecdir}/webkit2gtk-%{api41}/jsc
+
 %files jsc
 %{_libexecdir}/webkit2gtk-%{api5}/jsc
 
 %files -n %{libjavascriptcoregtk4}
 %{_libdir}/libjavascriptcoregtk-%{api}.so.%{javascriptcoregtk4_major}
 %{_libdir}/libjavascriptcoregtk-%{api}.so.%{javascriptcoregtk4_major}.*
+
+%files -n %{libjavascriptcoregtk41}
+%{_libdir}/libjavascriptcoregtk-%{api41}.so.%{javascriptcoregtk41_major}
+%{_libdir}/libjavascriptcoregtk-%{api41}.so.%{javascriptcoregtk41_major}.*
 
 %files -n %{libjavascriptcoregtk}
 %{_libdir}/libjavascriptcoregtk-%{api5}.so.%{javascriptcoregtk_major}
@@ -374,6 +512,10 @@ cd ..
 %files -n %{libwebkit2}
 %{_libdir}/libwebkit2gtk-%{api}.so.%{webkit2_major}
 %{_libdir}/libwebkit2gtk-%{api}.so.%{webkit2_major}.*
+
+%files -n %{libwebkit41}
+%{_libdir}/libwebkit2gtk-%{api41}.so.%{webkit41_major}
+%{_libdir}/libwebkit2gtk-%{api41}.so.%{webkit41_major}.*
 
 %files -n %{libwebkit5}
 %{_libdir}/libwebkit2gtk-%{api5}.so.%{webkit5_major}
@@ -391,15 +533,28 @@ cd ..
 %{_libdir}/pkgconfig/*-%{api}.pc
 %{_datadir}/gir-1.0/*-%{api}.gir
 
+%files -n %{develname41}
+%{_includedir}/webkitgtk-%{api41}
+%{_libdir}/*-%{api41}.so
+%{_libdir}/pkgconfig/*-%{api41}.pc
+%{_datadir}/gir-1.0/*-%{api41}.gir
+
 %files -n %{javascriptcoregtk_gir}
 %{_libdir}/girepository-1.0/JavaScriptCore-%{api5}.typelib
 
 %files -n %{javascriptcoregtk_gir4}
 %{_libdir}/girepository-1.0/JavaScriptCore-%{api}.typelib
 
+%files -n %{javascriptcoregtk_gir41}
+%{_libdir}/girepository-1.0/JavaScriptCore-%{api41}.typelib
+
 %files -n %{webkit2_gir}
 %{_libdir}/girepository-1.0/WebKit2-%{api}.typelib
 %{_libdir}/girepository-1.0/WebKit2WebExtension-%{api}.typelib
+
+%files -n %{webkit41_gir}
+%{_libdir}/girepository-1.0/WebKit2-%{api41}.typelib
+%{_libdir}/girepository-1.0/WebKit2WebExtension-%{api41}.typelib
 
 %files -n %{webkit5_gir}
 %{_libdir}/girepository-1.0/WebKit2-%{api5}.typelib
