@@ -42,7 +42,7 @@
 Summary:	Web browser engine
 Name:		webkit
 Version:	2.38.0
-Release:	4
+Release:	5
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -180,6 +180,7 @@ allows you to interact with the JavaScript engine directly.
 Summary:	GTK+ port of WebKit web browser engine for old libraries
 Group:		System/Libraries
 Requires:	%{name}4 = %{version}
+Obsoletes:	Obsoletes:	%{_lib}webkit2gtk4.0_37 < %{EVRD}
 
 %description -n	%{libwebkit2}
 The GTK+ port of WebKit is intended to provide a browser component
