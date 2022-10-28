@@ -10,10 +10,3 @@ index 855566ba..645afa9a 100644
  target_link_libraries(test_pas verifier_lib pas_lib chaos_lib)
  target_link_libraries(verifier_lib pas_lib)
  target_link_libraries(chaos_lib pas_lib)
-@@ -49,4 +50,4 @@ target_link_libraries(chaos pas_lib)
- target_link_libraries(mbmalloc_bmalloc pas_lib)
- target_link_libraries(mbmalloc_hotbit pas_lib)
- target_link_libraries(mbmalloc_iso_common_primitive pas_lib)
--target_link_libraries(mbmalloc_iso_common_primitive_verified verifier_lib pas_lib)
-\ No newline at end of file
-+target_link_libraries(mbmalloc_iso_common_primitive_verified verifier_lib pas_lib)
