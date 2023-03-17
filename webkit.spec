@@ -66,6 +66,7 @@ BuildRequires:  ruby
 BuildRequires:  rubygems
 BuildRequires:  cmake
 BuildRequires:	libatomic-devel
+BuildRequires:	unifdef
 BuildRequires:	egl-devel
 # For wayland-scanner
 BuildRequires:	wayland-tools
