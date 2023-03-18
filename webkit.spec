@@ -453,11 +453,11 @@ cd ..
 %install
 %make_install -C build-4.0
 
-%find_lang WebKit2GTK-%{api}
+%find_lang WebKitGTK-%{api}
 
 %make_install -C build-4.1
 
-%find_lang WebKit2GTK-%{api41}
+%find_lang WebKitGTK-%{api41}
 
 %make_install -C build-5.0
 
@@ -466,7 +466,7 @@ cd ..
 %files common
 %{_bindir}/WebKitWebDriver
 
-%files -n %{name}4 -f WebKit2GTK-%{api}.lang
+%files -n %{name}4 -f WebKitGTK-%{api}.lang
 %doc %{_datadir}/gtk-doc/html/
 %dir %{_libexecdir}/webkit2gtk-%{api}
 %{_libexecdir}/webkit2gtk-%{api}/*
@@ -475,7 +475,7 @@ cd ..
 %dir %{_libdir}/webkit2gtk-%{api}/injected-bundle
 %{_libdir}/webkit2gtk-%{api}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
-%files -n %{name}4.1 -f WebKit2GTK-%{api41}.lang
+%files -n %{name}4.1 -f WebKitGTK-%{api41}.lang
 %dir %{_libexecdir}/webkit2gtk-%{api41}
 %{_libexecdir}/webkit2gtk-%{api41}/*
 %exclude %{_libexecdir}/webkit2gtk-%{api41}/jsc
