@@ -483,7 +483,7 @@ cd ..
 %dir %{_libdir}/webkit2gtk-%{api41}/injected-bundle
 %{_libdir}/webkit2gtk-%{api41}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
-%files -f WebKit2GTK-%{api6}.lang
+%files -f WebKitGTK-%{api6}.lang
 %dir %{_libexecdir}/webkit2gtk-%{api6}
 %{_libexecdir}/webkit2gtk-%{api6}/*
 %exclude %{_libexecdir}/webkit2gtk-%{api6}/jsc
