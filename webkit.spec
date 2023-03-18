@@ -468,12 +468,12 @@ cd ..
 
 %files -n %{name}4 -f WebKitGTK-%{api}.lang
 %doc %{_datadir}/gtk-doc/html/
-%dir %{_libexecdir}/webkit2gtk-%{api}
-%{_libexecdir}/webkit2gtk-%{api}/*
+#dir %{_libexecdir}/webkit2gtk-%{api}
+#{_libexecdir}/webkit2gtk-%{api}/*
 %exclude %{_libexecdir}/webkit2gtk-%{api}/jsc
-%dir %{_libdir}/webkit2gtk-%{api}
-%dir %{_libdir}/webkit2gtk-%{api}/injected-bundle
-%{_libdir}/webkit2gtk-%{api}/injected-bundle/libwebkit2gtkinjectedbundle.so
+#dir %{_libdir}/webkit2gtk-%{api}
+#dir %{_libdir}/webkit2gtk-%{api}/injected-bundle
+#{_libdir}/webkit2gtk-%{api}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
 %files -n %{name}4.1 -f WebKitGTK-%{api41}.lang
 %dir %{_libexecdir}/webkit2gtk-%{api41}
