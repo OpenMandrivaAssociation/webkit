@@ -31,7 +31,7 @@
 %define libwebkit41 %mklibname webkit2gtk %{api41}
 %define webkit41_gir %mklibname webkit2gtk-gir %{api41}
 
-%define webkit6_major 0
+%define webkit6_major 4
 %define libwebkit6 %mklibname webkit2gtk %{api6}
 %define webkit6_gir %mklibname webkit2gtk-gir %{api6}
 
