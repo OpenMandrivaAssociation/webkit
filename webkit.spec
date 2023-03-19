@@ -19,7 +19,7 @@
 %define libjavascriptcoregtk41 %mklibname javascriptcoregtk %{api41}
 %define javascriptcoregtk_gir41 %mklibname javascriptcore-gir %{api41}
 
-%define javascriptcoregtk_major 0
+%define javascriptcoregtk_major 1
 %define libjavascriptcoregtk %mklibname javascriptcoregtk %{api6}
 %define javascriptcoregtk_gir %mklibname javascriptcore-gir %{api6}
 
