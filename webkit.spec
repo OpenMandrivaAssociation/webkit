@@ -484,12 +484,12 @@ cd ..
 %{_libdir}/webkit2gtk-%{api41}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
 %files -f WebKitGTK-%{api6}.lang
-#dir %{_libexecdir}/webkit2gtk-%{api6}
-#{_libexecdir}/webkit2gtk-%{api6}/*
-%exclude %{_libexecdir}/webkit2gtk-%{api6}/jsc
-#dir %{_libdir}/webkit2gtk-%{api6}
-#dir %{_libdir}/webkit2gtk-%{api6}/injected-bundle
-#{_libdir}/webkit2gtk-%{api6}/injected-bundle/libwebkit2gtkinjectedbundle.so
+%dir %{_libexecdir}/webkitgtk-%{api6}
+%{_libexecdir}/webkitgtk-%{api6}/*
+%exclude %{_libexecdir}/webkitgtk-%{api6}/jsc
+%dir %{_libdir}/webkitgtk-%{api6}
+%dir %{_libdir}/webkitgtk-%{api6}/injected-bundle
+%{_libdir}/webkitgtk-%{api6}/injected-bundle/libwebkitgtkinjectedbundle.so
 
 %files jsc4
 %{_libexecdir}/webkit2gtk-%{api}/jsc
@@ -498,7 +498,7 @@ cd ..
 %{_libexecdir}/webkit2gtk-%{api41}/jsc
 
 %files jsc
-#{_libexecdir}/webkit2gtk-%{api6}/jsc
+%{_libexecdir}/webkitgtk-%{api6}/jsc
 
 %files -n %{libjavascriptcoregtk4}
 %{_libdir}/libjavascriptcoregtk-%{api}.so.%{javascriptcoregtk4_major}
@@ -509,8 +509,8 @@ cd ..
 %{_libdir}/libjavascriptcoregtk-%{api41}.so.%{javascriptcoregtk41_major}.*
 
 %files -n %{libjavascriptcoregtk}
-#{_libdir}/libjavascriptcoregtk-%{api6}.so.%{javascriptcoregtk_major}
-#{_libdir}/libjavascriptcoregtk-%{api6}.so.%{javascriptcoregtk_major}.*
+%{_libdir}/libjavascriptcoregtk-%{api6}.so.%{javascriptcoregtk_major}
+%{_libdir}/libjavascriptcoregtk-%{api6}.so.%{javascriptcoregtk_major}.*
 
 %files -n %{libwebkit2}
 %{_libdir}/libwebkit2gtk-%{api}.so.%{webkit2_major}
@@ -521,14 +521,14 @@ cd ..
 %{_libdir}/libwebkit2gtk-%{api41}.so.%{webkit41_major}.*
 
 %files -n %{libwebkit6}
-#{_libdir}/libwebkit2gtk-%{api6}.so.%{webkit6_major}
-#{_libdir}/libwebkit2gtk-%{api6}.so.%{webkit6_major}.*
+%{_libdir}/libwebkitgtk-%{api6}.so.%{webkit6_major}
+%{_libdir}/libwebkitgtk-%{api6}.so.%{webkit6_major}.*
 
 %files -n %{develname}
-#{_includedir}/webkitgtk-%{api6}
-#{_libdir}/*-%{api6}.so
-#{_libdir}/pkgconfig/*-%{api6}.pc
-#{_datadir}/gir-1.0/*-%{api6}.gir
+%{_includedir}/webkitgtk-%{api6}
+%{_libdir}/*-%{api6}.so
+%{_libdir}/pkgconfig/*-%{api6}.pc
+%{_datadir}/gir-1.0/*-%{api6}.gir
 
 %files -n %{develname4}
 %{_includedir}/webkitgtk-%{api}
@@ -543,7 +543,7 @@ cd ..
 %{_datadir}/gir-1.0/*-%{api41}.gir
 
 %files -n %{javascriptcoregtk_gir}
-#{_libdir}/girepository-1.0/JavaScriptCore-%{api6}.typelib
+%{_libdir}/girepository-1.0/JavaScriptCore-%{api6}.typelib
 
 %files -n %{javascriptcoregtk_gir4}
 %{_libdir}/girepository-1.0/JavaScriptCore-%{api}.typelib
@@ -560,5 +560,5 @@ cd ..
 %{_libdir}/girepository-1.0/WebKit2WebExtension-%{api41}.typelib
 
 %files -n %{webkit6_gir}
-#{_libdir}/girepository-1.0/WebKit2-%{api6}.typelib
-#{_libdir}/girepository-1.0/WebKit2WebExtension-%{api6}.typelib
+%{_libdir}/girepository-1.0/WebKit-%{api6}.typelib
+%{_libdir}/girepository-1.0/WebKitWebProcessExtension-%{api6}.typelib
