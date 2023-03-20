@@ -45,13 +45,13 @@ Version:	2.40.0
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
-Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
+Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 # (cb) force disable lto when building the typelibs
 #Patch1:		webkitgtk-2.10.4-nolto.patch
 #Patch3:		webkit-gtk-2.24.4-eglmesaext-include.patch
 # imported from mga
 Patch4:		webkitgtk-linking.patch
-URL:		http://www.webkitgtk.org
+URL:		https://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
@@ -202,6 +202,7 @@ Linux using old libraries.
 Summary:	GTK+ port of WebKit web browser engine
 Group:		System/Libraries
 Requires:	%{name} = %{version}
+Obsoletes:	%{_lib}webkit2gtk5.0 < %{EVRD}
 
 %description -n	%{libwebkit6}
 The GTK+ port of WebKit is intended to provide a browser component
