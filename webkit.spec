@@ -360,8 +360,9 @@ export CXX=g++
 
 # Clang 14 and webkit 2.36.0 crashing at compile
 # Clang 15 and webkit 2.38.0 compiles fine but hardly crashing at runtime. Back to GCC.
-export CC=gcc
-export CXX=g++
+# GCC 13.1 and webkit 2.40.1 failed to build, back to Clang 16, and see if it not cause any issues at runtime.
+#export CC=gcc
+#export CXX=g++
 
 export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
