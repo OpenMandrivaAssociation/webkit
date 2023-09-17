@@ -123,6 +123,9 @@ BuildRequires:	pkgconfig(libwoff2enc)
 BuildRequires:	pkgconfig(libwoff2dec)
 BuildRequires:	woff2-devel
 BuildRequires:	%{_lib}gstreamer-plugins-bad-gir1.0
+BuildRequires:	lib64gstreamer1.0_0
+BuildRequires:	lib64gstbase1.0_0
+BuildRequires:	lib64gst-gir1.0
 
 Requires:	%{name}-common = %{EVRD}
 Requires:	%{libwebkit6} = %{version}
