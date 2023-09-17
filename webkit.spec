@@ -383,6 +383,7 @@ export CMAKE_BUILD_DIR=build-4.0
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
+ 	-DUSE_GSTREAMER_TRANSCODER=False \
 %ifarch aarch64 %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
