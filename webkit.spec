@@ -122,6 +122,7 @@ BuildRequires:	pkgconfig(libwoff2common)
 BuildRequires:	pkgconfig(libwoff2enc)
 BuildRequires:	pkgconfig(libwoff2dec)
 BuildRequires:	woff2-devel
+BuildRequires:	typelib(GstTranscoder) >= 1.22.5
 
 Requires:	%{name}-common = %{EVRD}
 Requires:	%{libwebkit6} = %{version}
