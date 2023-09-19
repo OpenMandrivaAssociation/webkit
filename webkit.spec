@@ -86,6 +86,16 @@ BuildRequires:  pkgconfig(gobject-introspection-1.0)
 BuildRequires:  pkgconfig(gstreamer-1.0)
 BuildRequires:  pkgconfig(gstreamer-plugins-base-1.0)
 BuildRequires:  pkgconfig(gstreamer-plugins-bad-1.0)
+BuildRequires:  pkgconfig(gstreamer-app-1.0)
+BuildRequires:  pkgconfig(gstreamer-audio-1.0)
+BuildRequires:  pkgconfig(gstreamer-codecparsers-1.0)
+BuildRequires:  pkgconfig(gstreamer-fft-1.0)
+BuildRequires:  pkgconfig(gstreamer-gl-1.0)
+BuildRequires:  pkgconfig(gstreamer-mpegts-1.0)
+BuildRequires:  pkgconfig(gstreamer-pbutils-1.0)
+BuildRequires:  pkgconfig(gstreamer-tag-1.0)
+BuildRequires:  pkgconfig(gstreamer-transcoder-1.0)
+BuildRequires:  pkgconfig(gstreamer-video-1.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(gtk4)
 BuildRequires:  pkgconfig(harfbuzz)
@@ -383,7 +393,6 @@ export CMAKE_BUILD_DIR=build-4.0
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
- 	-DUSE_GSTREAMER_TRANSCODER=False \
 %ifarch aarch64 %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
@@ -410,7 +419,6 @@ export CMAKE_BUILD_DIR=build-4.1
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
- 	-DUSE_GSTREAMER_TRANSCODER=False \
 %ifarch aarch64 %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
@@ -438,7 +446,6 @@ export CMAKE_BUILD_DIR=build-6.0
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
 	-DUSE_SOUP2=OFF \
- 	-DUSE_GSTREAMER_TRANSCODER=False \
 %ifarch aarch64 %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
