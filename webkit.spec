@@ -41,8 +41,8 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.40.5
-Release:	3
+Version:	2.42.0
+Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -97,6 +97,7 @@ BuildRequires:  pkgconfig(icu-uc)
 BuildRequires:	pkgconfig(lcms2)
 BuildRequires:	pkgconfig(libavif)
 BuildRequires:  pkgconfig(libjpeg)
+BuildRequires:	pkgconfig(libjxl)
 BuildRequires:  pkgconfig(libnotify)
 BuildRequires:  pkgconfig(libopenjp2)
 BuildRequires:  pkgconfig(libpcre)
