@@ -1,0 +1,26 @@
+diff -up webkitgtk-2.40.5/CMakeLists.txt.omv~ webkitgtk-2.40.5/CMakeLists.txt
+diff -up webkitgtk-2.40.5/Source/cmake/GStreamerChecks.cmake.omv~ webkitgtk-2.40.5/Source/cmake/GStreamerChecks.cmake
+--- webkitgtk-2.40.5/Source/cmake/GStreamerChecks.cmake.omv~	2023-09-21 12:52:11.558781656 +0200
++++ webkitgtk-2.40.5/Source/cmake/GStreamerChecks.cmake	2023-09-21 13:00:34.994312773 +0200
+@@ -37,6 +37,11 @@ if (ENABLE_VIDEO OR ENABLE_WEB_AUDIO)
+           endif ()
+ 
+           find_package(GStreamer 1.16.2 REQUIRED COMPONENTS ${GSTREAMER_COMPONENTS})
++	  if (USE_GSTREAMER_TRANSCODER)
++              pkg_check_modules(gstreamer_transcoder gstreamer-transcoder-1.0)
++	      set(PC_GSTREAMER_TRANSCODER_VERSION ${gstreamer_transcoder_VERSION})
++          endif ()
++
+ 
+           if (ENABLE_WEB_AUDIO)
+               if (NOT PC_GSTREAMER_AUDIO_FOUND OR NOT PC_GSTREAMER_FFT_FOUND)
+@@ -59,7 +64,7 @@ if (ENABLE_VIDEO OR ENABLE_WEB_AUDIO)
+           endif ()
+ 
+           if (ENABLE_MEDIA_RECORDER AND USE_GSTREAMER_TRANSCODER AND (NOT PC_GSTREAMER_TRANSCODER_FOUND OR PC_GSTREAMER_TRANSCODER_VERSION VERSION_LESS "1.20"))
+-              message(FATAL_ERROR "GStreamerTranscoder >= 1.20 is needed for USE_GSTREAMER_TRANSCODER.")
++		  message(FATAL_ERROR "GStreamerTranscoder >= 1.20 is needed for USE_GSTREAMER_TRANSCODER, got ${PC_GSTREAMER_TRANSCODER_VERSION}")
+           endif ()
+ 
+           if (USE_GSTREAMER_WEBRTC AND (PC_GSTREAMER_VERSION VERSION_LESS "1.20" OR NOT PC_GSTREAMER_WEBRTC_FOUND))
+diff -up webkitgtk-2.40.5/Source/cmake/OptionsGTK.cmake.omv~ webkitgtk-2.40.5/Source/cmake/OptionsGTK.cmake
