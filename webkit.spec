@@ -122,10 +122,6 @@ BuildRequires:	pkgconfig(libwoff2common)
 BuildRequires:	pkgconfig(libwoff2enc)
 BuildRequires:	pkgconfig(libwoff2dec)
 BuildRequires:	woff2-devel
-BuildRequires:	%{_lib}gstreamer-plugins-bad-gir1.0
-BuildRequires:	lib64gstreamer1.0_0
-BuildRequires:	lib64gstbase1.0_0
-BuildRequires:	lib64gst-gir1.0
 
 Requires:	%{name}-common = %{EVRD}
 Requires:	%{libwebkit6} = %{version}
@@ -383,7 +379,6 @@ export CMAKE_BUILD_DIR=build-4.0
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
- 	-DUSE_GSTREAMER_TRANSCODER=False \
 %ifarch aarch64 %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
@@ -410,7 +405,6 @@ export CMAKE_BUILD_DIR=build-4.1
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
- 	-DUSE_GSTREAMER_TRANSCODER=False \
 %ifarch aarch64 %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
@@ -438,7 +432,6 @@ export CMAKE_BUILD_DIR=build-6.0
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
 	-DUSE_SOUP2=OFF \
- 	-DUSE_GSTREAMER_TRANSCODER=False \
 %ifarch aarch64 %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
