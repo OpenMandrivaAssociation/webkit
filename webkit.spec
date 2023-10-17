@@ -41,7 +41,7 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.42.0
+Version:	2.42.1
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
@@ -93,6 +93,9 @@ BuildRequires:	pkgconfig(gstreamer-transcoder-1.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(gtk4)
 BuildRequires:  pkgconfig(harfbuzz)
+BuildRequires:	pkgconfig(harfbuzz-cairo)
+BuildRequires:	pkgconfig(harfbuzz-icu)
+BuildRequires:	pkgconfig(harfbuzz-gobject)
 BuildRequires:  pkgconfig(icu-uc)
 BuildRequires:	pkgconfig(lcms2)
 BuildRequires:	pkgconfig(libavif)
