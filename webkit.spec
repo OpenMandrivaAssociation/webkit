@@ -42,7 +42,7 @@
 Summary:	Web browser engine
 Name:		webkit
 Version:	2.42.2
-Release:	1
+Release:	2
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -369,8 +369,8 @@ export CXX=g++
 # Clang 14 and webkit 2.36.0 crashing at compile
 # Clang 15 and webkit 2.38.0 compiles fine but hardly crashing at runtime. Back to GCC.
 # GCC 13.1 and webkit 2.40.1 failed to build, back to Clang 16, and see if it not cause any issues at runtime.
-#export CC=gcc
-#export CXX=g++
+export CC=gcc
+export CXX=g++
 
 export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
