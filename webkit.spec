@@ -61,6 +61,7 @@ BuildRequires:	bison
 BuildRequires:	bubblewrap
 BuildRequires:	ccache
 BuildRequires:	flex
+BuildRequires:	gettext
 BuildRequires:	gperf
 BuildRequires:	hyphen-devel
 BuildRequires:	perl-JSON-PP
