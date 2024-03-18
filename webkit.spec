@@ -381,7 +381,7 @@ cd ..
 %{_libdir}/webkitgtk-%{api6}/injected-bundle/libwebkitgtkinjectedbundle.so
 
 %files jsc4.1
-%{_libexecdir}/webkit2gtk-%{api41}/jsc
+#{_libexecdir}/webkit2gtk-%{api41}/jsc
 
 %files jsc
 %{_libexecdir}/webkitgtk-%{api6}/jsc
