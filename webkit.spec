@@ -1,6 +1,3 @@
-#FIXME
-# For some unknown (yet) reason webkit on aarch64 can be build only on mcbin. Synquacer causing strange issue.
-
 %define _empty_manifest_terminate_build 0
 %define _disable_lto 1
 %define Werror_cflags %nil
@@ -145,15 +142,6 @@ Group:		System/Libraries
 %description common
 Files needed by every version of the WebKit engine
 
-%package -n %{name}4
-Summary:	Version of the WebKit engine for older libraries
-Group:		System/Libraries
-Requires:	%{name}-common = %{EVRD}
-Requires:	%{libwebkit2} = %{version}
-
-%description -n %{name}4
-Version of the WebKit engine for older libraries
-
 %package -n %{name}4.1
 Summary:	Version of the WebKit engine for older libraries
 Group:		System/Libraries
@@ -161,14 +149,6 @@ Requires:	%{name}-common = %{EVRD}
 
 %description -n %{name}4.1
 Version of the WebKit engine for older libraries
-
-%package	jsc4
-Summary:	JavaScriptCore shell for old WebKit GTK+
-Group:		Development/GNOME and GTK+
-
-%description	jsc4
-jsc4 is a shell for old JavaScriptCore, WebKit's JavaScript engine. It
-allows you to interact with the JavaScript engine directly.
 
 %package	jsc4.1
 Summary:	JavaScriptCore shell for old WebKit GTK+
@@ -185,17 +165,6 @@ Group:		Development/GNOME and GTK+
 %description	jsc
 jsc is a shell for JavaScriptCore, WebKit's JavaScript engine. It
 allows you to interact with the JavaScript engine directly.
-
-%package -n	%{libwebkit2}
-Summary:	GTK+ port of WebKit web browser engine for old libraries
-Group:		System/Libraries
-Requires:	%{name}4 = %{version}
-Obsoletes:	%{_lib}webkit2gtk4.0_37 < %{EVRD}
-
-%description -n	%{libwebkit2}
-The GTK+ port of WebKit is intended to provide a browser component
-primarily for users of the portable GTK+ UI toolkit on platforms like
-Linux using old libraries.
 
 %package -n	%{libwebkit41}
 Summary:	GTK+ port of WebKit web browser engine for old libraries
@@ -218,18 +187,6 @@ The GTK+ port of WebKit is intended to provide a browser component
 primarily for users of the portable GTK+ UI toolkit on platforms like
 Linux.
 
-%package -n	%{libjavascriptcoregtk4}
-Summary:        GTK+ port of WebKit web browser engine for old libraries
-Group:          System/Libraries
-Obsoletes:	%{_lib}javascriptcoregtk4.0_18 < %{EVRD}
-
-%description -n	%{libjavascriptcoregtk4}
-The GTK+ port of WebKit is intended to provide a browser component
-primarily for users of the portable GTK+ UI toolkit on platforms like
-Linux.
-
-This version is for use with old libraries
-
 %package -n	%{libjavascriptcoregtk41}
 Summary:        GTK+ port of WebKit web browser engine for old libraries
 Group:          System/Libraries
@@ -249,22 +206,6 @@ Group:          System/Libraries
 The GTK+ port of WebKit is intended to provide a browser component
 primarily for users of the portable GTK+ UI toolkit on platforms like
 Linux.
-
-%package -n	%{develname4}
-Summary:	Development files for WebKit GTK+ port for old libraries
-Group:		Development/GNOME and GTK+
-Provides:	%{name}2-devel = %{version}-%{release}
-Provides:	libwebkit2gtk-devel = %{version}-%{release}
-Requires:	%{libjavascriptcoregtk4} = %{version}
-Requires:	%{libwebkit2} = %{version}
-Requires:	%{javascriptcoregtk_gir4} = %{version}
-Requires:	%{webkit2_gir} = %{version}
-
-%description -n	%{develname4}
-The GTK+ port of WebKit is intended to provide a browser component
-primarily for users of the portable GTK+ UI toolkit on platforms like
-Linux. This package contains development headers for use with old
-libraries.
 
 %package -n	%{develname41}
 Summary:	Development files for WebKit GTK+ port for old libraries
@@ -305,14 +246,6 @@ Requires:       %{libjavascriptcoregtk} = %{version}-%{release}
 %description -n	%{javascriptcoregtk_gir}
 GObject Introspection interface description for JSCore.
 
-%package -n	%{javascriptcoregtk_gir4}
-Summary:        GObject Introspection interface description for JSCore
-Group:          System/Libraries
-Requires:       %{libjavascriptcoregtk4} = %{version}-%{release}
-
-%description -n	%{javascriptcoregtk_gir4}
-GObject Introspection interface description for JSCore.
-
 %package -n	%{javascriptcoregtk_gir41}
 Summary:        GObject Introspection interface description for JSCore
 Group:          System/Libraries
@@ -320,14 +253,6 @@ Requires:       %{libjavascriptcoregtk41} = %{version}-%{release}
 
 %description -n	%{javascriptcoregtk_gir41}
 GObject Introspection interface description for JSCore.
-
-%package -n	%{webkit2_gir}
-Summary:        GObject Introspection interface description for %{name}
-Group:          System/Libraries
-Requires:       %{libwebkit2} = %{version}-%{release}
-
-%description -n	%{webkit2_gir}
-GObject Introspection interface description for WebKit.
 
 %package -n	%{webkit41_gir}
 Summary:        GObject Introspection interface description for %{name}
@@ -357,16 +282,6 @@ GObject Introspection interface description for WebKit.
 # fix weird memory allocation
 export GIGACAGE_ENABLED=0
 
-#ifarch %{ix86} %{arm} %{armx}
-# clang wont build this on i586:
-# /bits/atomic_base.h:408:16: error: cannot compile this atomic library call yet
-#      { return __atomic_add_fetch(&_M_i, 1, memory_order_seq_cst); }
-# ARMv7hnl build failed on Clang, use again GCC.
-%ifarch %{arm}
-export CC=gcc
-export CXX=g++
-%endif
-
 # Clang 14 and webkit 2.36.0 crashing at compile
 # Clang 15 and webkit 2.38.0 compiles fine but hardly crashing at runtime. Back to GCC.
 # GCC 13.1 and webkit 2.40.1 failed to build, back to Clang 16, and see if it not cause any issues at runtime.
@@ -376,31 +291,6 @@ export CXX=g++
 export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
-export CMAKE_BUILD_DIR=build-4.0
-%cmake	-DPORT=GTK \
-	-DUSE_SOUP2=ON \
-	-DUSE_LD_GOLD=OFF \
-	-DUSE_WOFF2:BOOL=ON \
-	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_C_FLAGS_RELEASE="" \
-	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
-	-DUSE_WPE_RENDERER=ON \
-	-DUSE_AVIF=ON \
-%ifarch aarch64 %{ix86} %{arm}
-	-DENABLE_JIT=OFF \
-	-DUSE_SYSTEM_MALLOC=ON \
-%endif
-%ifarch aarch64
-	-DWTF_CPU_ARM64_CORTEXA53=OFF \
-%endif
-%ifarch %{ix86}
-	-DCMAKE_CXX_LIBRARY_ARCHITECTURE=%{_arch} \
-%endif
-	-DCMAKE_C_FLAGS_DEBUG="" \
-	-DCMAKE_CXX_FLAGS_RELEASE="" \
-	-DCMAKE_CXX_FLAGS_DEBUG=""
-cd ..
 
 export CMAKE_BUILD_DIR=build-4.1
 %cmake	-DPORT=GTK \
@@ -455,16 +345,11 @@ export CMAKE_BUILD_DIR=build-6.0
 	-DCMAKE_CXX_FLAGS_DEBUG=""
 cd ..
 
-%make_build -C build-4.0
-
 %make_build -C build-4.1
 
 %make_build -C build-6.0
 
 %install
-%make_install -C build-4.0
-
-%find_lang WebKitGTK-%{api}
 
 %make_install -C build-4.1
 
@@ -476,15 +361,6 @@ cd ..
 
 %files common
 %{_bindir}/WebKitWebDriver
-
-%files -n %{name}4 -f WebKitGTK-%{api}.lang
-%doc %{_datadir}/gtk-doc/html/
-%dir %{_libexecdir}/webkit2gtk-%{api}
-%{_libexecdir}/webkit2gtk-%{api}/*
-%exclude %{_libexecdir}/webkit2gtk-%{api}/jsc
-%dir %{_libdir}/webkit2gtk-%{api}
-%dir %{_libdir}/webkit2gtk-%{api}/injected-bundle
-%{_libdir}/webkit2gtk-%{api}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
 %files -n %{name}4.1 -f WebKitGTK-%{api41}.lang
 %dir %{_libexecdir}/webkit2gtk-%{api41}
@@ -502,18 +378,11 @@ cd ..
 %dir %{_libdir}/webkitgtk-%{api6}/injected-bundle
 %{_libdir}/webkitgtk-%{api6}/injected-bundle/libwebkitgtkinjectedbundle.so
 
-%files jsc4
-%{_libexecdir}/webkit2gtk-%{api}/jsc
-
 %files jsc4.1
 %{_libexecdir}/webkit2gtk-%{api41}/jsc
 
 %files jsc
 %{_libexecdir}/webkitgtk-%{api6}/jsc
-
-%files -n %{libjavascriptcoregtk4}
-%{_libdir}/libjavascriptcoregtk-%{api}.so.%{javascriptcoregtk4_major}
-%{_libdir}/libjavascriptcoregtk-%{api}.so.%{javascriptcoregtk4_major}.*
 
 %files -n %{libjavascriptcoregtk41}
 %{_libdir}/libjavascriptcoregtk-%{api41}.so.%{javascriptcoregtk41_major}
@@ -522,10 +391,6 @@ cd ..
 %files -n %{libjavascriptcoregtk}
 %{_libdir}/libjavascriptcoregtk-%{api6}.so.%{javascriptcoregtk_major}
 %{_libdir}/libjavascriptcoregtk-%{api6}.so.%{javascriptcoregtk_major}.*
-
-%files -n %{libwebkit2}
-%{_libdir}/libwebkit2gtk-%{api}.so.%{webkit2_major}
-%{_libdir}/libwebkit2gtk-%{api}.so.%{webkit2_major}.*
 
 %files -n %{libwebkit41}
 %{_libdir}/libwebkit2gtk-%{api41}.so.%{webkit41_major}
@@ -541,12 +406,6 @@ cd ..
 %{_libdir}/pkgconfig/*-%{api6}.pc
 %{_datadir}/gir-1.0/*-%{api6}.gir
 
-%files -n %{develname4}
-%{_includedir}/webkitgtk-%{api}
-%{_libdir}/*-%{api}.so
-%{_libdir}/pkgconfig/*-%{api}.pc
-%{_datadir}/gir-1.0/*-%{api}.gir
-
 %files -n %{develname41}
 %{_includedir}/webkitgtk-%{api41}
 %{_libdir}/*-%{api41}.so
@@ -556,15 +415,8 @@ cd ..
 %files -n %{javascriptcoregtk_gir}
 %{_libdir}/girepository-1.0/JavaScriptCore-%{api6}.typelib
 
-%files -n %{javascriptcoregtk_gir4}
-%{_libdir}/girepository-1.0/JavaScriptCore-%{api}.typelib
-
 %files -n %{javascriptcoregtk_gir41}
 %{_libdir}/girepository-1.0/JavaScriptCore-%{api41}.typelib
-
-%files -n %{webkit2_gir}
-%{_libdir}/girepository-1.0/WebKit2-%{api}.typelib
-%{_libdir}/girepository-1.0/WebKit2WebExtension-%{api}.typelib
 
 %files -n %{webkit41_gir}
 %{_libdir}/girepository-1.0/WebKit2-%{api41}.typelib
