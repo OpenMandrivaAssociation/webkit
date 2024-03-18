@@ -354,7 +354,7 @@ cd ..
 
 %make_install -C build-4.1
 
-%find_lang WebKitGTK-%{api41}
+#find_lang WebKitGTK-%{api41}
 
 %make_install -C build-6.0
 
@@ -363,7 +363,8 @@ cd ..
 %files common
 %{_bindir}/WebKitWebDriver
 
-%files -n %{name}4.1 -f WebKitGTK-%{api41}.lang
+%files -n %{name}4.1 
+#-f WebKitGTK-%{api41}.lang
 %dir %{_libexecdir}/webkit2gtk-%{api41}
 %{_libexecdir}/webkit2gtk-%{api41}/*
 %exclude %{_libexecdir}/webkit2gtk-%{api41}/jsc
