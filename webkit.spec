@@ -387,16 +387,16 @@ cd ..
 %{_libexecdir}/webkitgtk-%{api6}/jsc
 
 %files -n %{libjavascriptcoregtk41}
-%{_libdir}/libjavascriptcoregtk-%{api41}.so.%{javascriptcoregtk41_major}
-%{_libdir}/libjavascriptcoregtk-%{api41}.so.%{javascriptcoregtk41_major}.*
+#{_libdir}/libjavascriptcoregtk-%{api41}.so.%{javascriptcoregtk41_major}
+#{_libdir}/libjavascriptcoregtk-%{api41}.so.%{javascriptcoregtk41_major}.*
 
 %files -n %{libjavascriptcoregtk}
 %{_libdir}/libjavascriptcoregtk-%{api6}.so.%{javascriptcoregtk_major}
 %{_libdir}/libjavascriptcoregtk-%{api6}.so.%{javascriptcoregtk_major}.*
 
 %files -n %{libwebkit41}
-%{_libdir}/libwebkit2gtk-%{api41}.so.%{webkit41_major}
-%{_libdir}/libwebkit2gtk-%{api41}.so.%{webkit41_major}.*
+#{_libdir}/libwebkit2gtk-%{api41}.so.%{webkit41_major}
+#{_libdir}/libwebkit2gtk-%{api41}.so.%{webkit41_major}.*
 
 %files -n %{libwebkit6}
 %{_libdir}/libwebkitgtk-%{api6}.so.%{webkit6_major}
@@ -409,20 +409,20 @@ cd ..
 %{_datadir}/gir-1.0/*-%{api6}.gir
 
 %files -n %{develname41}
-%{_includedir}/webkitgtk-%{api41}
-%{_libdir}/*-%{api41}.so
-%{_libdir}/pkgconfig/*-%{api41}.pc
-%{_datadir}/gir-1.0/*-%{api41}.gir
+#{_includedir}/webkitgtk-%{api41}
+#{_libdir}/*-%{api41}.so
+#{_libdir}/pkgconfig/*-%{api41}.pc
+#{_datadir}/gir-1.0/*-%{api41}.gir
 
 %files -n %{javascriptcoregtk_gir}
 %{_libdir}/girepository-1.0/JavaScriptCore-%{api6}.typelib
 
 %files -n %{javascriptcoregtk_gir41}
-%{_libdir}/girepository-1.0/JavaScriptCore-%{api41}.typelib
+#{_libdir}/girepository-1.0/JavaScriptCore-%{api41}.typelib
 
 %files -n %{webkit41_gir}
-%{_libdir}/girepository-1.0/WebKit2-%{api41}.typelib
-%{_libdir}/girepository-1.0/WebKit2WebExtension-%{api41}.typelib
+#{_libdir}/girepository-1.0/WebKit2-%{api41}.typelib
+#{_libdir}/girepository-1.0/WebKit2WebExtension-%{api41}.typelib
 
 %files -n %{webkit6_gir}
 %{_libdir}/girepository-1.0/WebKit-%{api6}.typelib
