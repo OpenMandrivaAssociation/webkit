@@ -365,12 +365,12 @@ cd ..
 
 %files -n %{name}4.1 
 #-f WebKitGTK-%{api41}.lang
-#dir %{_libexecdir}/webkit2gtk-%{api41}
-#{_libexecdir}/webkit2gtk-%{api41}/*
-#exclude %{_libexecdir}/webkit2gtk-%{api41}/jsc
-#dir %{_libdir}/webkit2gtk-%{api41}
-#dir %{_libdir}/webkit2gtk-%{api41}/injected-bundle
-#{_libdir}/webkit2gtk-%{api41}/injected-bundle/libwebkit2gtkinjectedbundle.so
+%dir %{_libexecdir}/webkit2gtk-%{api41}
+%{_libexecdir}/webkit2gtk-%{api41}/*
+%exclude %{_libexecdir}/webkit2gtk-%{api41}/jsc
+%dir %{_libdir}/webkit2gtk-%{api41}
+%dir %{_libdir}/webkit2gtk-%{api41}/injected-bundle
+%{_libdir}/webkit2gtk-%{api41}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
 %files -f WebKitGTK-%{api6}.lang
 %dir %{_libexecdir}/webkitgtk-%{api6}
@@ -381,7 +381,7 @@ cd ..
 %{_libdir}/webkitgtk-%{api6}/injected-bundle/libwebkitgtkinjectedbundle.so
 
 %files jsc4.1
-#{_libexecdir}/webkit2gtk-%{api41}/jsc
+%{_libexecdir}/webkit2gtk-%{api41}/jsc
 
 %files jsc
 %{_libexecdir}/webkitgtk-%{api6}/jsc
