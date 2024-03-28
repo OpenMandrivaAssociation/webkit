@@ -296,6 +296,7 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 export CMAKE_BUILD_DIR=build-4.1
 %cmake	-DPORT=GTK \
 	-DUSE_SOUP2=OFF \
+	-DUSE_GTK4=OFF \
 	-DUSE_LD_GOLD=OFF \
 	-DUSE_WOFF2:BOOL=ON \
 	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
@@ -304,7 +305,7 @@ export CMAKE_BUILD_DIR=build-4.1
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
-%ifarch aarch64 %{ix86} %{arm}
+%ifarch %{aarch64} %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
 %endif
@@ -331,7 +332,7 @@ export CMAKE_BUILD_DIR=build-6.0
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
 	-DUSE_SOUP2=OFF \
-%ifarch aarch64 %{ix86} %{arm}
+%ifarch %{aarch64} %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
 %endif
@@ -354,7 +355,7 @@ cd ..
 
 %make_install -C build-4.1
 
-#find_lang WebKitGTK-%{api41}
+%find_lang WebKitGTK-%{api41}
 
 %make_install -C build-6.0
 
@@ -363,14 +364,13 @@ cd ..
 %files common
 %{_bindir}/WebKitWebDriver
 
-%files -n %{name}4.1 
-#-f WebKitGTK-%{api41}.lang
-#dir %{_libexecdir}/webkit2gtk-%{api41}
-#{_libexecdir}/webkit2gtk-%{api41}/*
-#exclude %{_libexecdir}/webkit2gtk-%{api41}/jsc
-#dir %{_libdir}/webkit2gtk-%{api41}
-#dir %{_libdir}/webkit2gtk-%{api41}/injected-bundle
-#{_libdir}/webkit2gtk-%{api41}/injected-bundle/libwebkit2gtkinjectedbundle.so
+%files -n %{name}4.1 -f WebKitGTK-%{api41}.lang
+%dir %{_libexecdir}/webkit2gtk-%{api41}
+%{_libexecdir}/webkit2gtk-%{api41}/*
+%exclude %{_libexecdir}/webkit2gtk-%{api41}/jsc
+%dir %{_libdir}/webkit2gtk-%{api41}
+%dir %{_libdir}/webkit2gtk-%{api41}/injected-bundle
+%{_libdir}/webkit2gtk-%{api41}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
 %files -f WebKitGTK-%{api6}.lang
 %dir %{_libexecdir}/webkitgtk-%{api6}
@@ -381,7 +381,7 @@ cd ..
 %{_libdir}/webkitgtk-%{api6}/injected-bundle/libwebkitgtkinjectedbundle.so
 
 %files jsc4.1
-#{_libexecdir}/webkit2gtk-%{api41}/jsc
+%{_libexecdir}/webkit2gtk-%{api41}/jsc
 
 %files jsc
 %{_libexecdir}/webkitgtk-%{api6}/jsc
@@ -407,12 +407,18 @@ cd ..
 %{_libdir}/*-%{api6}.so
 %{_libdir}/pkgconfig/*-%{api6}.pc
 %{_datadir}/gir-1.0/*-%{api6}.gir
+%doc %{_docdir}/javascriptcoregtk-6.0
+%doc %{_docdir}/webkitgtk-6.0
+%doc %{_docdir}/webkitgtk-web-process-extension-6.0
 
 %files -n %{develname41}
 %{_includedir}/webkitgtk-%{api41}
 %{_libdir}/*-%{api41}.so
 %{_libdir}/pkgconfig/*-%{api41}.pc
 %{_datadir}/gir-1.0/*-%{api41}.gir
+%doc %{_docdir}/javascriptcoregtk-4.1
+%doc %{_docdir}/webkit2gtk-4.1
+%doc %{_docdir}/webkit2gtk-web-extension-4.1
 
 %files -n %{javascriptcoregtk_gir}
 %{_libdir}/girepository-1.0/JavaScriptCore-%{api6}.typelib
