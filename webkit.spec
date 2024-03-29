@@ -39,7 +39,7 @@
 Summary:	Web browser engine
 Name:		webkit
 Version:	2.44.0
-Release:	1
+Release:	2
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -147,6 +147,7 @@ Files needed by every version of the WebKit engine
 Summary:	Version of the WebKit engine for older libraries
 Group:		System/Libraries
 Requires:	%{name}-common = %{EVRD}
+Obsoletes:	%{name}4 < %{EVRD}
 
 %description -n %{name}4.1
 Version of the WebKit engine for older libraries
@@ -171,6 +172,7 @@ allows you to interact with the JavaScript engine directly.
 Summary:	GTK+ port of WebKit web browser engine for old libraries
 Group:		System/Libraries
 Requires:	%{name}4.1 = %{version}
+Obsoletes:	%{_lib}webkit2gtk4.0 < %{EVRD}
 
 %description -n	%{libwebkit41}
 The GTK+ port of WebKit is intended to provide a browser component
@@ -191,6 +193,7 @@ Linux.
 %package -n	%{libjavascriptcoregtk41}
 Summary:        GTK+ port of WebKit web browser engine for old libraries
 Group:          System/Libraries
+Obsoletes:	%{_lib}javascriptcoregtk4.0 < %{EVRD}
 
 %description -n	%{libjavascriptcoregtk41}
 The GTK+ port of WebKit is intended to provide a browser component
@@ -217,6 +220,7 @@ Requires:	%{libjavascriptcoregtk41} = %{version}
 Requires:	%{libwebkit41} = %{version}
 Requires:	%{javascriptcoregtk_gir41} = %{version}
 Requires:	%{webkit41_gir} = %{version}
+Obsoletes:	%{_lib}webkit2-devel < %{EVRD}
 
 %description -n	%{develname41}
 The GTK+ port of WebKit is intended to provide a browser component
@@ -251,6 +255,7 @@ GObject Introspection interface description for JSCore.
 Summary:        GObject Introspection interface description for JSCore
 Group:          System/Libraries
 Requires:       %{libjavascriptcoregtk41} = %{version}-%{release}
+Obsoletes:	%{_lib}webkit2gtk-gir4.0 < %{EVRD}
 
 %description -n	%{javascriptcoregtk_gir41}
 GObject Introspection interface description for JSCore.
