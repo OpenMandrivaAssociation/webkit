@@ -39,7 +39,7 @@
 Summary:	Web browser engine
 Name:		webkit
 Version:	2.44.0
-Release:	2
+Release:	3
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -256,6 +256,7 @@ Summary:        GObject Introspection interface description for JSCore
 Group:          System/Libraries
 Requires:       %{libjavascriptcoregtk41} = %{version}-%{release}
 Obsoletes:	%{_lib}webkit2gtk-gir4.0 < %{EVRD}
+Obsoletes:	%{_lib}javascriptcore-gir4.0 < %{EVRD}
 
 %description -n	%{javascriptcoregtk_gir41}
 GObject Introspection interface description for JSCore.
