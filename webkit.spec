@@ -39,7 +39,7 @@
 Summary:	Web browser engine
 Name:		webkit
 Version:	2.44.0
-Release:	3
+Release:	4
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -130,6 +130,7 @@ BuildRequires:	woff2-devel
 
 Requires:	%{name}-common = %{EVRD}
 Requires:	%{libwebkit6} = %{version}
+Requires:	xdg-dbus-proxy
 %rename		webkit2
 
 %description
@@ -146,6 +147,7 @@ Files needed by every version of the WebKit engine
 Summary:	Version of the WebKit engine for older libraries
 Group:		System/Libraries
 Requires:	%{name}-common = %{EVRD}
+Requires:	xdg-dbus-proxy
 Obsoletes:	%{name}4 < %{EVRD}
 
 %description -n %{name}4.1
