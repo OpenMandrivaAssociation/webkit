@@ -38,7 +38,7 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.45.92
+Version:	2.46.0
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
