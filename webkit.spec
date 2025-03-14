@@ -38,8 +38,9 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.46.6
-Release:	3
+
+Version:	2.48.0
+Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -58,6 +59,7 @@ BuildRequires:	bison
 BuildRequires:	bubblewrap
 BuildRequires:	ccache
 BuildRequires:	flex
+BuildRequires:	flite-devel
 BuildRequires:	gettext
 BuildRequires:	gperf
 BuildRequires:	hyphen-devel
