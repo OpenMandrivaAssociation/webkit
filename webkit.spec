@@ -58,6 +58,7 @@ BuildRequires:	bison
 BuildRequires:	bubblewrap
 BuildRequires:	ccache
 BuildRequires:	flex
+BuildRequires:	flite-devel
 BuildRequires:	gettext
 BuildRequires:	gperf
 BuildRequires:	hyphen-devel
