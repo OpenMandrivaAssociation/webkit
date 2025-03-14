@@ -38,6 +38,7 @@
 
 Summary:	Web browser engine
 Name:		webkit
+
 Version:	2.48.0
 Release:	1
 License:	BSD and LGPLv2+
