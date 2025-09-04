@@ -49,7 +49,7 @@ Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 #Patch3:		webkit-gtk-2.24.4-eglmesaext-include.patch
 # Fix build. Alleged build system engineers not knowing what their
 # own packages provide is beyond ridiculous.
-Patch1:		webkit-2.40.5-gnomes-are-stupid-drunk-monkeys-on-crack.patch
+#Patch1:		webkit-2.40.5-gnomes-are-stupid-drunk-monkeys-on-crack.patch
 # imported from mga
 Patch4:		webkitgtk-linking.patch
 URL:		https://www.webkitgtk.org
