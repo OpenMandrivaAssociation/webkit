@@ -52,6 +52,11 @@ Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 #Patch1:		webkit-2.40.5-gnomes-are-stupid-drunk-monkeys-on-crack.patch
 # imported from mga
 Patch4:		webkitgtk-linking.patch
+# https://github.com/WebKit/WebKit/commit/730bffd856d2a1e56dd3bd2a0702282f19c5242a
+Patch5:          build.patch
+# https://bugs.webkit.org/show_bug.cgi?id=300718
+Patch6:          CVE-2025-43421.patch
+
 URL:		https://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
