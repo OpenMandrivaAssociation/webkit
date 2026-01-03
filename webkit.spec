@@ -54,6 +54,7 @@ Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 Patch4:		webkitgtk-linking.patch
 
 URL:		https://www.webkitgtk.org
+BuildRequires:	make
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
