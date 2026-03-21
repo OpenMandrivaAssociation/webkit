@@ -1,0 +1,85 @@
+From 0816379351c30372d8d8001336dc65e93e76ef93 Mon Sep 17 00:00:00 2001
+From: Philippe Normand <philn@igalia.com>
+Date: Mon, 16 Mar 2026 01:50:00 -0700
+Subject: [PATCH] [GStreamer] clang-22
+ unsafe-buffer-usage-in-unique-ptr-array-access warnings
+ https://bugs.webkit.org/show_bug.cgi?id=309980
+
+Reviewed by Xabier Rodriguez-Calvar.
+
+Store the FFT complex numbers in a Vector instead of a std::unique_ptr.
+
+* Source/WebCore/platform/audio/FFTFrame.h:
+* Source/WebCore/platform/audio/gstreamer/FFTFrameGStreamer.cpp:
+(WebCore::FFTFrame::FFTFrame):
+(WebCore::FFTFrame::doFFT):
+(WebCore::FFTFrame::doInverseFFT):
+
+Canonical link: https://commits.webkit.org/309309@main
+---
+ Source/WebCore/platform/audio/FFTFrame.h                  | 4 ++--
+ .../platform/audio/gstreamer/FFTFrameGStreamer.cpp        | 8 ++++----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/Source/WebCore/platform/audio/FFTFrame.h b/Source/WebCore/platform/audio/FFTFrame.h
+index c29644bb1b99..39fea4e498e7 100644
+--- a/Source/WebCore/platform/audio/FFTFrame.h
++++ b/Source/WebCore/platform/audio/FFTFrame.h
+@@ -42,7 +42,7 @@
+ #include <memory>
+ #include <wtf/Forward.h>
+ #include <wtf/TZoneMalloc.h>
+-#include <wtf/UniqueArray.h>
++#include <wtf/Vector.h>
+ 
+ namespace WebCore {
+ 
+@@ -108,7 +108,7 @@ class FFTFrame {
+ #if USE(GSTREAMER)
+     GUniquePtr<GstFFTF32> m_fft;
+     GUniquePtr<GstFFTF32> m_inverseFft;
+-    UniqueArray<GstFFTF32Complex> m_complexData;
++    Vector<GstFFTF32Complex> m_complexData;
+ #endif // USE(GSTREAMER)
+ 
+     AudioFloatArray m_realData;
+diff --git a/Source/WebCore/platform/audio/gstreamer/FFTFrameGStreamer.cpp b/Source/WebCore/platform/audio/gstreamer/FFTFrameGStreamer.cpp
+index cb474dfce1c0..4f573b856086 100644
+--- a/Source/WebCore/platform/audio/gstreamer/FFTFrameGStreamer.cpp
++++ b/Source/WebCore/platform/audio/gstreamer/FFTFrameGStreamer.cpp
+@@ -45,7 +45,7 @@ namespace WebCore {
+ FFTFrame::FFTFrame(unsigned fftSize)
+     : m_FFTSize(fftSize)
+     , m_log2FFTSize(static_cast<unsigned>(log2(fftSize)))
+-    , m_complexData(makeUniqueArray<GstFFTF32Complex>(unpackedFFTDataSize(m_FFTSize)))
++    , m_complexData(unpackedFFTDataSize(m_FFTSize))
+     , m_realData(unpackedFFTDataSize(m_FFTSize))
+     , m_imagData(unpackedFFTDataSize(m_FFTSize))
+ {
+@@ -68,7 +68,7 @@ FFTFrame::FFTFrame()
+ FFTFrame::FFTFrame(const FFTFrame& frame)
+     : m_FFTSize(frame.m_FFTSize)
+     , m_log2FFTSize(frame.m_log2FFTSize)
+-    , m_complexData(makeUniqueArray<GstFFTF32Complex>(unpackedFFTDataSize(m_FFTSize)))
++    , m_complexData(unpackedFFTDataSize(m_FFTSize))
+     , m_realData(unpackedFFTDataSize(frame.m_FFTSize))
+     , m_imagData(unpackedFFTDataSize(frame.m_FFTSize))
+ {
+@@ -89,7 +89,7 @@ FFTFrame::~FFTFrame() = default;
+ 
+ void FFTFrame::doFFT(std::span<const float> data)
+ {
+-    gst_fft_f32_fft(m_fft.get(), data.data(), m_complexData.get());
++    gst_fft_f32_fft(m_fft.get(), data.data(), m_complexData.mutableSpan().data());
+ 
+     auto imagData = m_imagData.span();
+     auto realData = m_realData.span();
+@@ -109,7 +109,7 @@ void FFTFrame::doInverseFFT(std::span<float> data)
+         m_complexData[i].r = realData[i];
+     }
+ 
+-    gst_fft_f32_inverse_fft(m_inverseFft.get(), m_complexData.get(), data.data());
++    gst_fft_f32_inverse_fft(m_inverseFft.get(), m_complexData.mutableSpan().data(), data.data());
+ 
+     // Scale so that a forward then inverse FFT yields exactly the original data.
+     VectorMath::multiplyByScalar(data.first(m_FFTSize), 1.0 / m_FFTSize, data);
