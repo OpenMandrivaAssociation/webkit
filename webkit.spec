@@ -39,7 +39,7 @@
 Summary:	Web browser engine
 Name:		webkit
 
-Version:	2.52.0
+Version:	2.52.1
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
@@ -53,7 +53,7 @@ Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 # imported from mga
 Patch4:		webkitgtk-linking.patch
 # Upstream, fix compilation
-Patch5:     https://patch-diff.githubusercontent.com/raw/WebKit/WebKit/pull/60655.patch
+Patch5:		build.patch
 URL:		https://www.webkitgtk.org
 BuildRequires:	make
 BuildRequires:	autoconf
