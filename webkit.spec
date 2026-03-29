@@ -39,8 +39,8 @@
 Summary:	Web browser engine
 Name:		webkit
 
-Version:	2.50.4
-Release:	2
+Version:	2.52.1
+Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -52,7 +52,8 @@ Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 #Patch1:		webkit-2.40.5-gnomes-are-stupid-drunk-monkeys-on-crack.patch
 # imported from mga
 Patch4:		webkitgtk-linking.patch
-
+# Upstream, fix compilation
+Patch5:		build.patch
 URL:		https://www.webkitgtk.org
 BuildRequires:	make
 BuildRequires:	autoconf
