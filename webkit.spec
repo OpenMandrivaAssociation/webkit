@@ -305,6 +305,15 @@ export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
 
+# from Fedora
+# JIT is broken on ARM systems with new ARMv8.5 BTI extension at the moment
+# Cf. https://bugzilla.redhat.com/show_bug.cgi?id=2130009
+# Cf. https://bugs.webkit.org/show_bug.cgi?id=245697
+# Disable BTI until this is fixed upstream.
+%ifarch aarch64
+%global optflags %(echo %{optflags} | sed 's/-mbranch-protection=standard /-mbranch-protection=pac-ret /')
+%endif
+
 export CMAKE_BUILD_DIR=build-4.1
 %cmake	-DPORT=GTK \
 	-DUSE_SOUP2=OFF \
@@ -318,7 +327,6 @@ export CMAKE_BUILD_DIR=build-4.1
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
 %ifarch %{aarch64} %{ix86} %{arm}
-	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
 %endif
 %ifarch aarch64
@@ -345,7 +353,6 @@ export CMAKE_BUILD_DIR=build-6.0
 	-DUSE_AVIF=ON \
 	-DUSE_SOUP2=OFF \
 %ifarch %{aarch64} %{ix86} %{arm}
-	-DENABLE_JIT=OFF \
 	-DUSE_SYSTEM_MALLOC=ON \
 %endif
 %ifarch aarch64
