@@ -325,7 +325,7 @@ export CMAKE_BUILD_DIR=build-4.1
 	-DUSE_WPE_RENDERER=ON \
 	-DUSE_AVIF=ON \
 %ifarch %{aarch64} %{ix86} %{arm}
-	-DUSE_SYSTEM_MALLOC=ON \
+	-DUSE_SYSTEM_MALLOC=OFF \
 %endif
 %ifarch aarch64
 	-DWTF_CPU_ARM64_CORTEXA53=OFF \
@@ -351,7 +351,7 @@ export CMAKE_BUILD_DIR=build-6.0
 	-DUSE_AVIF=ON \
 	-DUSE_SOUP2=OFF \
 %ifarch %{aarch64} %{ix86} %{arm}
-	-DUSE_SYSTEM_MALLOC=ON \
+	-DUSE_SYSTEM_MALLOC=OFF \
 %endif
 %ifarch aarch64
 	-DWTF_CPU_ARM64_CORTEXA53=OFF \
