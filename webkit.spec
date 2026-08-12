@@ -40,7 +40,7 @@ Summary:	Web browser engine
 Name:		webkit
 
 Version:	2.52.5
-Release:	1
+Release:	2
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
