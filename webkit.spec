@@ -69,6 +69,7 @@ BuildRequires:	xdg-dbus-proxy
 BuildRequires:  ruby
 BuildRequires:  rubygems
 BuildRequires:  cmake
+BuildRequires:	ninja
 BuildRequires:	libatomic-devel
 BuildRequires:	backstrace-devel
 BuildRequires:	unifdef
@@ -335,7 +336,8 @@ export CMAKE_BUILD_DIR=build-4.1
 %endif
 	-DCMAKE_C_FLAGS_DEBUG="" \
 	-DCMAKE_CXX_FLAGS_RELEASE="" \
-	-DCMAKE_CXX_FLAGS_DEBUG=""
+	-DCMAKE_CXX_FLAGS_DEBUG="" \
+	-G Ninja \
 cd ..
 
 export CMAKE_BUILD_DIR=build-6.0
@@ -361,7 +363,8 @@ export CMAKE_BUILD_DIR=build-6.0
 %endif
 	-DCMAKE_C_FLAGS_DEBUG="" \
 	-DCMAKE_CXX_FLAGS_RELEASE="" \
-	-DCMAKE_CXX_FLAGS_DEBUG=""
+	-DCMAKE_CXX_FLAGS_DEBUG="" \
+	-G Ninja \
 cd ..
 
 %make_build -C build-4.1
