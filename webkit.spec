@@ -367,17 +367,17 @@ export CMAKE_BUILD_DIR=build-6.0
 	-G Ninja
 cd ..
 
-%make_build -C build-4.1
+%ninja_build -C build-4.1
 
-%make_build -C build-6.0
+%ninja_build -C build-6.0
 
 %install
 
-%make_install -C build-4.1
+%ninja_install -C build-4.1
 
 %find_lang WebKitGTK-%{api41}
 
-%make_install -C build-6.0
+%ninja_install -C build-6.0
 
 %find_lang WebKitGTK-%{api6}
 
