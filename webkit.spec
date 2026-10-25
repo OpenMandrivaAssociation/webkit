@@ -39,8 +39,8 @@
 Summary:	Web browser engine
 Name:		webkit
 
-Version:	2.54.1
-Release:	2
+Version:	2.54.2
+Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	https://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
